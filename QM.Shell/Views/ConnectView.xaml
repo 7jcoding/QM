@@ -1,0 +1,36 @@
+﻿<UserControl x:Class="QM.Shell.Views.ConnectView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:acw="clr-namespace:AsNum.Common.WPF;assembly=AsNum.Common.WPF"
+             xmlns:ac="clr-namespace:AsNum.WPF.Controls;assembly=AsNum.WPF.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid acw:UniPadding.Padding="2" ac:Busy.MaskType="Adorned" ac:Busy.Text="{Binding Info}" ac:Busy.Show="{Binding NeedShowInfo}">
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <Label Grid.Row="0" Grid.Column="0" Content="主机" />
+        <TextBox Text="{Binding Connection.Host}" Grid.Column="1" Grid.Row="0" />
+
+        <Label Grid.Row="1" Grid.Column="0" Content="端口" />
+        <TextBox Text="{Binding Connection.Port}" Grid.Column="1" Grid.Row="1" />
+
+        <Label Grid.Row="2" Grid.Column="0" Content="Scheduler" />
+        <TextBox Text="{Binding Connection.BindName}" Grid.Row="2" Grid.Column="1" />
+
+        <StackPanel Grid.Row="3" Grid.ColumnSpan="2" Orientation="Horizontal" acw:UniPadding.Padding="2" HorizontalAlignment="Center">
+            <Button x:Name="Connect" Content="连接" Width="50"  />
+            <Button x:Name="Cancel" Content="取消" Width="50" />
+        </StackPanel>
+    </Grid>
+</UserControl>

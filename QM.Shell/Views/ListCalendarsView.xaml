@@ -1,0 +1,35 @@
+﻿<UserControl x:Class="QM.Shell.Views.ListCalendarsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal">
+            <Button x:Name="Refresh" Content="刷新" Width="50" />
+            <Button x:Name="Edit" Content="编辑" Width="50" IsEnabled="{Binding CanEdit}" />
+            <Button x:Name="Delete" Content="删除" Width="50" IsEnabled="{Binding CanEdit}" />
+        </StackPanel>
+
+        <DataGrid x:Name="Calendars" Grid.Row="1" Grid.Column="0"
+                  SelectedItem="{Binding CurrentCalendar}"
+                  AutoGenerateColumns="False" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Key}" Header="名称" />
+                <DataGridTextColumn Binding="{Binding Value.Description}" Header="描述" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <ContentControl x:Name="Editor" Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" />
+    </Grid>
+</UserControl>

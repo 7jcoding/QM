@@ -1,0 +1,96 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QM.Shell", "QM.Shell\QM.Shell.csproj", "{45736462-3AC7-4021-B4E6-A8C83252E44A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QM.Server", "QM.Server\QM.Server.csproj", "{9AA68B91-F92E-4A7A-9C63-1D3CD8AB9B79}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobA", "JobA\JobA.csproj", "{6AC26A5E-3A25-41D1-A0B8-B4042378E102}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Jobs", "Jobs", "{D7559A56-3C60-4D56-A098-E667A5CB36E6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Listeners", "Listeners", "{D69B5297-2EF9-436D-983F-2789A5D42344}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MailListener", "MailListener\MailListener.csproj", "{B212FD83-5B62-4398-9C8C-417AFA4BE770}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UDPListener", "UDPListener\UDPListener.csproj", "{7AA15E11-D81A-42E1-A38A-586095A11B37}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchedulerUDPTracker", "SchedulerUDPTracker\SchedulerUDPTracker.csproj", "{BB323548-975C-4ECD-A045-A330F02E9124}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApplication1", "ConsoleApplication1\ConsoleApplication1.csproj", "{C476359B-BD52-4450-A54F-2832C501B9C6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QM.Common", "QM.Common\QM.Common.csproj", "{FE886780-9672-47FC-9484-3BD503234E02}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Examples", "Examples", "{2BA47838-4B4F-4331-8528-D1596ED8825A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QM.RemoteLoader", "QM.RemoteLoader\QM.RemoteLoader.csproj", "{B9A460DF-9BAA-4880-834F-F2538CAC8E58}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobAReferences", "JobAReferences\JobAReferences.csproj", "{23C2C26D-9C3F-494E-83B7-F83D230B1E20}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{6C3C6535-D35A-4A88-8280-11FF4ADC0D5A}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{45736462-3AC7-4021-B4E6-A8C83252E44A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45736462-3AC7-4021-B4E6-A8C83252E44A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45736462-3AC7-4021-B4E6-A8C83252E44A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45736462-3AC7-4021-B4E6-A8C83252E44A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9AA68B91-F92E-4A7A-9C63-1D3CD8AB9B79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9AA68B91-F92E-4A7A-9C63-1D3CD8AB9B79}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9AA68B91-F92E-4A7A-9C63-1D3CD8AB9B79}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9AA68B91-F92E-4A7A-9C63-1D3CD8AB9B79}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6AC26A5E-3A25-41D1-A0B8-B4042378E102}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6AC26A5E-3A25-41D1-A0B8-B4042378E102}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6AC26A5E-3A25-41D1-A0B8-B4042378E102}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6AC26A5E-3A25-41D1-A0B8-B4042378E102}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B212FD83-5B62-4398-9C8C-417AFA4BE770}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B212FD83-5B62-4398-9C8C-417AFA4BE770}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B212FD83-5B62-4398-9C8C-417AFA4BE770}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B212FD83-5B62-4398-9C8C-417AFA4BE770}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7AA15E11-D81A-42E1-A38A-586095A11B37}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7AA15E11-D81A-42E1-A38A-586095A11B37}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7AA15E11-D81A-42E1-A38A-586095A11B37}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7AA15E11-D81A-42E1-A38A-586095A11B37}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB323548-975C-4ECD-A045-A330F02E9124}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB323548-975C-4ECD-A045-A330F02E9124}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB323548-975C-4ECD-A045-A330F02E9124}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB323548-975C-4ECD-A045-A330F02E9124}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C476359B-BD52-4450-A54F-2832C501B9C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C476359B-BD52-4450-A54F-2832C501B9C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C476359B-BD52-4450-A54F-2832C501B9C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C476359B-BD52-4450-A54F-2832C501B9C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE886780-9672-47FC-9484-3BD503234E02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE886780-9672-47FC-9484-3BD503234E02}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE886780-9672-47FC-9484-3BD503234E02}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE886780-9672-47FC-9484-3BD503234E02}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9A460DF-9BAA-4880-834F-F2538CAC8E58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9A460DF-9BAA-4880-834F-F2538CAC8E58}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9A460DF-9BAA-4880-834F-F2538CAC8E58}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9A460DF-9BAA-4880-834F-F2538CAC8E58}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23C2C26D-9C3F-494E-83B7-F83D230B1E20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23C2C26D-9C3F-494E-83B7-F83D230B1E20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23C2C26D-9C3F-494E-83B7-F83D230B1E20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23C2C26D-9C3F-494E-83B7-F83D230B1E20}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6AC26A5E-3A25-41D1-A0B8-B4042378E102} = {2BA47838-4B4F-4331-8528-D1596ED8825A}
+		{B212FD83-5B62-4398-9C8C-417AFA4BE770} = {D69B5297-2EF9-436D-983F-2789A5D42344}
+		{7AA15E11-D81A-42E1-A38A-586095A11B37} = {D69B5297-2EF9-436D-983F-2789A5D42344}
+		{2BA47838-4B4F-4331-8528-D1596ED8825A} = {D7559A56-3C60-4D56-A098-E667A5CB36E6}
+		{23C2C26D-9C3F-494E-83B7-F83D230B1E20} = {2BA47838-4B4F-4331-8528-D1596ED8825A}
+	EndGlobalSection
+EndGlobal

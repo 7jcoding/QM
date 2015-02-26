@@ -1,0 +1,48 @@
+﻿<ac:StyleWindow x:Class="QM.Shell.Views.ShellView"
+        xmlns:ac="clr-namespace:AsNum.WPF.Controls;assembly=AsNum.WPF.Controls"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:cm="http://www.caliburnproject.org"
+        xmlns:a="clr-namespace:AsNum.Common.WPF;assembly=AsNum.Common.WPF"
+        xmlns:apc="clr-namespace:AsNum.WPF.Controls;assembly=AsNum.WPF.Controls"
+        Title="Quartz.NET Job Mananager"
+        Icon="/Shell.ico"
+        >
+
+    <ac:StyleWindow.Resources>
+        <a:BindingProxy x:Key="Proxy" Data="{Binding}" />
+    </ac:StyleWindow.Resources>
+
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <ac:StyleDialog Title="{Binding DialogTitle}" ShowMask="True" Show="{Binding IsShowDialog, Mode=TwoWay}" Width="{Binding DialogWidth}" Height="{Binding DialogHeight}">
+            <ac:StyleDialog.Content>
+                <ContentControl cm:View.Model="{Binding Source={StaticResource Proxy}, Path=Data.DialogVM}" />
+            </ac:StyleDialog.Content>
+        </ac:StyleDialog>
+
+        <DockPanel Grid.Row="0">
+            <Menu Padding="2">
+                <MenuItem Header="列表">
+                    <MenuItem Header="基本信息" x:Name="ShowMetadata" />
+                    <MenuItem Header="触发器列表" x:Name="ShowTriggers" />
+                    <MenuItem Header="任务列表" x:Name="ShowAllJobs" />
+                    <MenuItem Header="日历列表" x:Name="ShowAllCalendars" />
+                    <MenuItem Header="正在运行的任务" x:Name="ShowRunningJobs" />
+                    <!--<MenuItem Header="监听器列表" x:Name="ShowListeners" />-->
+                </MenuItem>
+                <MenuItem Header="编辑">
+                    <MenuItem Header="添加新任务" x:Name="ShowAddJob" />
+                    <MenuItem Header="添加新日历" x:Name="ShowAddCalendar" />
+                </MenuItem>
+            </Menu>
+        </DockPanel>
+
+        <ContentControl Margin="5" Grid.Row="1" cm:View.Model="{Binding CurrentVM}" />
+    </Grid>
+
+</ac:StyleWindow>
