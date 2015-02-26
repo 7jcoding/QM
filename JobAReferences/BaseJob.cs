@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace JobAReferences {
-    public abstract class BaseJob : IJob {
+    public abstract class ThirdPirtyBaseJob : IJob {
         public abstract void Execute(IJobExecutionContext context);
     }
 }

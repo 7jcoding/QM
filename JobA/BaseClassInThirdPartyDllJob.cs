@@ -13,9 +13,9 @@ namespace JobA {
     /// Or add references to QM.Server
     /// </summary>
     [Description("基类在第三方DLL中,加载失败的示例")]
-    public class BaseClassInThirdPartyDllJob : BaseJob {
+    public class BaseClassInThirdPartyDllJob : ThirdPirtyBaseJob {
         public override void Execute(Quartz.IJobExecutionContext context) {
-
+            Console.WriteLine(".........");
         }
     }
 }
