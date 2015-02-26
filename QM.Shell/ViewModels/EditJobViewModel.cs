@@ -111,6 +111,7 @@ namespace QM.Shell.ViewModels {
             set {
                 this.jobType = value;
                 //this.GetJobParametersFromJobType(value);
+                this.Parameters.Clear();
                 this.MergeParameters(this.Parameters, value);
             }
         }
