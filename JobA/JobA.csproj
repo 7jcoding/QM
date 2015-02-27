@@ -61,6 +61,7 @@
     <Compile Include="ParameterParseJob.cs" />
     <Compile Include="Parameter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="LeaseTestJob.cs" />
     <Compile Include="ThirdPartyDllReferencesJob.cs" />
   </ItemGroup>
   <ItemGroup>

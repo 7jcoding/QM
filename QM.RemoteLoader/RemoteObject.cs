@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace QM.RemoteLoader {
-    public class RemoteObject : MarshalByRefObject, IDisposable {
+    public class RemoteObject : MarshalByRefObject, IDisposable, ISponsor {
 
 
         public Assembly CurrAssembly {
@@ -66,6 +66,16 @@ namespace QM.RemoteLoader {
                 if (method != null)
                     method.Invoke(this.Instance, null);
             }
+        }
+
+        /// <summary>
+        /// 远程对象续约
+        /// </summary>
+        public TimeSpan Renewal(ILease lease) {
+#if DEBUG
+            Console.WriteLine("续约");
+#endif
+            return TimeSpan.FromMinutes(5);
         }
     }
 }

@@ -28,9 +28,9 @@ namespace QM.Server {
         }
 
         public void Execute(IJobExecutionContext context) {
-            if (this.Obj == null) {
-                this.Obj = this.IDL.GetObject(this.JobType.Assembly.Location, this.JobType.FullName);
-            }
+            //if (this.Obj == null) {
+            //    this.Obj = this.IDL.GetObject(this.JobType.Assembly.Location, this.JobType.FullName);
+            //}
             this.Obj.ExecuteMethod("Execute", context);
 
         }

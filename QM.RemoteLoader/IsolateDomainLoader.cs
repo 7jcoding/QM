@@ -12,7 +12,7 @@ namespace QM.RemoteLoader {
     public class IsolateDomainLoader : IDisposable {
         private AppDomain Domain;
 
-        private RemoteObjectSponsor Sponsor = new RemoteObjectSponsor();
+        //private RemoteObjectSponsor Sponsor = new RemoteObjectSponsor();
 
         public IsolateDomainLoader(string path, string configFileName = "") {
             AppDomainSetup setup = new AppDomainSetup();
@@ -39,7 +39,7 @@ namespace QM.RemoteLoader {
             obj.Init(assemblyFile, typeFullName);
 
             ILease lease = (ILease)obj.GetLifetimeService();
-            lease.Register(this.Sponsor);
+            lease.Register(obj);
 
             return obj;
         }
