@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QM.Shell", "QM.Shell\QM.Shell.csproj", "{45736462-3AC7-4021-B4E6-A8C83252E44A}"
 EndProject
@@ -35,6 +35,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{6C3C65
 		.nuget\NuGet.exe = .nuget\NuGet.exe
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QM.Server.WebApi", "QM.Server.WebApi\QM.Server.WebApi.csproj", "{AA7C231C-D9EC-492C-92B3-0FE16AD0D6A8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -82,6 +84,10 @@ Global
 		{23C2C26D-9C3F-494E-83B7-F83D230B1E20}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{23C2C26D-9C3F-494E-83B7-F83D230B1E20}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{23C2C26D-9C3F-494E-83B7-F83D230B1E20}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA7C231C-D9EC-492C-92B3-0FE16AD0D6A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA7C231C-D9EC-492C-92B3-0FE16AD0D6A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA7C231C-D9EC-492C-92B3-0FE16AD0D6A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA7C231C-D9EC-492C-92B3-0FE16AD0D6A8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

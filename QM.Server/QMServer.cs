@@ -1,4 +1,6 @@
 ﻿using Common.Logging;
+using Microsoft.Owin.Hosting;
+using QM.Server.WebApi;
 using Quartz;
 using Quartz.Impl;
 using Quartz.Impl.Matchers;
@@ -14,6 +16,7 @@ namespace QM.Server {
 
         private ISchedulerFactory Factory = null;
         private IScheduler Scheduler = null;
+        private IDisposable _WebApp = null;
 
         private bool CanStart = false;
         public QMServer() {
@@ -35,6 +38,8 @@ namespace QM.Server {
 
             this.LoadTriggerListeners(this.Scheduler);
 
+            this._WebApp = WebApp.Start<Startup>("http://localhost:5556");
+
             return this.CanStart;
         }
 
@@ -42,6 +47,10 @@ namespace QM.Server {
             if (this.Scheduler != null) {
                 this.Scheduler.Shutdown();
             }
+
+            if (this._WebApp != null)
+                this._WebApp.Dispose();
+
             return true;
         }
 
