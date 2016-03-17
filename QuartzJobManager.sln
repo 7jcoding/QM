@@ -38,6 +38,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{6C3C65
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QM.Server.WebApi", "QM.Server.WebApi\QM.Server.WebApi.csproj", "{AA7C231C-D9EC-492C-92B3-0FE16AD0D6A8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QM.Manager", "QM.Manager\QM.Manager.csproj", "{51AAFBAD-649F-41E9-87F6-CC8078576BA3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QM.Server.ApiClient", "QM.Server.ApiClient\QM.Server.ApiClient.csproj", "{944F0E8B-B873-47E4-89D0-268F9974BADB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -88,6 +92,14 @@ Global
 		{AA7C231C-D9EC-492C-92B3-0FE16AD0D6A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AA7C231C-D9EC-492C-92B3-0FE16AD0D6A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AA7C231C-D9EC-492C-92B3-0FE16AD0D6A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51AAFBAD-649F-41E9-87F6-CC8078576BA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51AAFBAD-649F-41E9-87F6-CC8078576BA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51AAFBAD-649F-41E9-87F6-CC8078576BA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51AAFBAD-649F-41E9-87F6-CC8078576BA3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{944F0E8B-B873-47E4-89D0-268F9974BADB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{944F0E8B-B873-47E4-89D0-268F9974BADB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{944F0E8B-B873-47E4-89D0-268F9974BADB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{944F0E8B-B873-47E4-89D0-268F9974BADB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

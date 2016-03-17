@@ -1,0 +1,179 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link href="bootstrap.css" rel="stylesheet" />
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+
+
+    <!--登陆框-->
+    <div class="modal" id="login" data-bind="with:Connector">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">连接服务</h4>
+                </div>
+                <div class="modal-body clearfix">
+                    <div class="col-xs-12">
+                        <span class="help-block">User</span>
+                        <input type="text" data-bind="value:Host" placeholder="服务器地址:端口" class="form-control input-sm" />
+                    </div>
+
+                    <div class="col-xs-12">
+                        <span class="help-block">User</span>
+                        <input type="text" data-bind="value:User" placeholder="用户名" class="form-control input-sm" />
+                    </div>
+
+                    <div class="col-xs-12">
+                        <span class="help-block">密码</span>
+                        <input type="password" data-bind="value:Pwd" placeholder="密码" class="form-control input-sm" />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" data-bind="click:Connect" class="btn btn-primary">连接</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--登陆框-->
+    <!-- 主体 -->
+    <div data-bind="visible:Connector.Connected">
+        <div>
+
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"> <a href="#triggers" aria-controls="home" role="tab" data-toggle="tab">Trigger List</a></li>
+                <li role="presentation">                <a href="#jobs" aria-controls="profile" role="tab" data-toggle="tab">Jobs</a></li>
+                <li role="presentation">                <a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Messages</a></li>
+                <li role="presentation">                <a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content" data-bind="with:Uploader">
+
+                <!--Trigger List-->
+                <div role="tabpanel" class="tab-pane active" id="triggers">Trigger List</div>
+                <!--Trigger List-->
+                <!--Jobs-->
+                <div role="tabpanel" class="tab-pane" id="jobs">
+                    <input type="text" data-bind="value:Name" />
+                    <input type="file" data-bind="file:File" />
+                    <input type="button" value="上传" data-bind="click:Upload" />
+                </div>
+                <!--Jobs-->
+
+                <div role="tabpanel" class="tab-pane" id="messages">...</div>
+
+                <div role="tabpanel" class="tab-pane" id="settings">...</div>
+            </div>
+
+        </div>
+    </div>
+    <!-- 主体 -->
+
+
+
+
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="http://apps.bdimg.com/libs/knockout.js/3.1.0/knockout.js"></script>
+
+    <script>
+        "use strict";
+
+        ko.bindingHandlers.file = {
+            init: function (element, valueAccessor) {
+                $(element).change(function () {
+                    valueAccessor()(element.files[0]);
+                });
+            },
+            update: function (element, valueAccessor) {
+                if (ko.unwrap(valueAccessor()) === null) {
+                    $(element).wrap('<form>').closest('form').get(0).reset();
+                    $(element).unwrap();
+                }
+            }
+        };
+
+        (function () {
+            var Connector = function () {
+                var self = this;
+
+                this.Host = ko.observable("http://localhost:5556");
+                this.User = ko.observable("admin"),
+                this.Pwd = ko.observable(),
+                this.Connected = ko.observable(),
+
+                this.Connect = function () {
+                    $.post("http://localhost:5556/api/Connect",
+                        { user: self.User(), pwd: self.Pwd() })
+                    .success(function (data) {
+                        if (data) {
+                            self.Connected(true);
+                            $("#login").modal('hide');
+                        } else {
+                            alert("连接失败");
+                        }
+                    });
+                }
+
+                this.Connected.subscribe(function (v) {
+                    if (!v)
+                        $('#login').modal();
+                }, this);
+            };
+
+            var Uploader = function () {
+                var self = this;
+
+                self.Name = ko.observable();
+                self.File = ko.observable();
+
+                self.Upload = function () {
+                    var formData = new FormData(self.File());
+                    $.ajax({
+                        url: 'http://localhost:5556/api/Types',
+                        type: 'POST',
+                        data: formData,
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        //xhr: function () {
+                        //    myXhr = $.ajaxSettings.xhr();
+                        //    if (myXhr.upload) { // check if upload property exists
+                        //        myXhr.upload.addEventListener('progress', progressHandlingFunction, false);
+                        //    }
+                        //    return myXhr;
+                        //},
+                        success: function (data) {
+
+                        }
+                    });
+
+                }
+            }
+
+            var VM = function () {
+                var self = this;
+
+                self.Connector = new Connector();
+                self.Uploader = new Uploader();
+
+                self.Connector.Connected(false);
+            };
+
+            var vm = new VM();
+            ko.applyBindings(vm);
+        })();
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+﻿<ac:StyleWindow x:Class="QM.Manager.Views.ShellView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:QM.Manager.Views"
+        xmlns:cm="http://www.caliburnproject.org"
+        xmlns:a="clr-namespace:AsNum.Common.WPF;assembly=AsNum.Common.WPF"
+        xmlns:ac="clr-namespace:AsNum.WPF.Controls;assembly=AsNum.WPF.Controls"
+        mc:Ignorable="d"
+        Title="Shell" Height="800" Width="1000">
+
+    <ac:StyleWindow.Resources>
+        <a:BindingProxy x:Key="Proxy" Data="{Binding}" />
+    </ac:StyleWindow.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>        
+
+        <ac:StyleDialog Title="{Binding DialogTitle}" ShowMask="True" Show="{Binding IsShowDialog, Mode=TwoWay}" Width="{Binding DialogWidth}" Height="{Binding DialogHeight}">
+            <ac:StyleDialog.Content>
+                <ContentControl cm:View.Model="{Binding Source={StaticResource Proxy}, Path=Data.DialogVM}" />
+            </ac:StyleDialog.Content>
+        </ac:StyleDialog>
+
+        <DockPanel Grid.Row="0">
+            <Menu Padding="2">
+                <MenuItem Header="列表">
+                    <MenuItem Header="基本信息" x:Name="ShowMetadata" />
+                    <MenuItem Header="触发器列表" x:Name="ShowTriggers" />
+                    <MenuItem Header="任务列表" x:Name="ShowAllJobs" />
+                    <MenuItem Header="日历列表" x:Name="ShowAllCalendars" />
+                    <MenuItem Header="正在运行的任务" x:Name="ShowRunningJobs" />
+                </MenuItem>
+                <MenuItem Header="编辑">
+                    <MenuItem Header="添加新任务" x:Name="ShowAddJob" />
+                    <MenuItem Header="添加新日历" x:Name="ShowAddCalendar" />
+                </MenuItem>
+            </Menu>
+        </DockPanel>
+
+        <ContentControl Margin="5" Grid.Row="1" cm:View.Model="{Binding CurrentVM}" />
+    </Grid>
+</ac:StyleWindow>

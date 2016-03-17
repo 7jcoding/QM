@@ -25,18 +25,18 @@ namespace QM.Server {
                 this.Scheduler = this.Factory.GetScheduler();
                 this.Scheduler.JobFactory = new IsolatedJobFactory();
                 this.CanStart = true;
-            } catch {
+            } catch (Exception ex) {
                 this.CanStart = false;
             }
         }
 
         public bool Start(HostControl hostControl) {
             if (this.Scheduler != null) {
-                this.LoadSchedulerListener(this.Scheduler);
+                //this.LoadSchedulerListener(this.Scheduler);
                 this.Scheduler.Start();
             }
 
-            this.LoadTriggerListeners(this.Scheduler);
+            //this.LoadTriggerListeners(this.Scheduler);
 
             this._WebApp = WebApp.Start<Startup>("http://localhost:5556");
 
