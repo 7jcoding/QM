@@ -54,8 +54,8 @@ namespace QM.Manager.ViewModels {
         //    }
         //}
 
-        public void ShowTriggers() {
-            this.Show(new TriggerListViewModel());
+        public async void ShowTriggers() {
+            await this.Show(new TriggerListViewModel());
         }
 
         //public void ShowAllJobs() {
@@ -86,10 +86,10 @@ namespace QM.Manager.ViewModels {
         //    this.ShowDialog(vm ?? new EditCalendarViewModel(), 700, 500);
         //}
 
-        public void Show(BaseScreen screen) {
+        public async Task Show(BaseScreen screen) {
             this.CurrentVM = screen;
             this.DisplayName = string.Format("任务调度管理 - {0}", this.CurrentVM.Title);
-            this.CurrentVM.Update();
+            await this.CurrentVM.Update();
             this.NotifyOfPropertyChange(() => this.CurrentVM);
         }
 

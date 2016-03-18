@@ -18,7 +18,7 @@ namespace QM.Manager.Common {
             get;
         }
 
-        public abstract void Update();
+        public abstract Task Update();
 
         public override string DisplayName {
             get {

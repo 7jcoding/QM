@@ -21,13 +21,28 @@ namespace QM.Server.ApiClient {
 
         }
 
-        private string BuildUri(BaseMethod mth) {
-            return string.Format("http://localhost:5556/api/{0}", mth.Model);
+        private string BuildUri(BaseMethod mth, HttpContent content = null) {
+            var url = string.Format("http://localhost:5556/api/{0}", mth.Model);
+            if (content == null) {
+                return url.SetUrlKeyValue(mth.GetParams());
+            } else
+                return url;
         }
 
         public async Task<T> Execute<T>(BaseMethod<T> method) {
+            if (method == null)
+                throw new ArgumentNullException("method");
+
+            var results = method.Validate();
+            if (!results.IsValid) {
+                throw new MethodValidationException(results);
+            }
+
+            var content = method.GetContent();
             using (var client = new HttpClient()) {
-                var request = new HttpRequestMessage(method.HttpMethod, this.BuildUri(method));
+                var request = new HttpRequestMessage(method.HttpMethod, this.BuildUri(method, content));
+                if (content != null)
+                    request.Content = content;
                 var rep = await client.SendAsync(request);
                 var json = await rep.Content.ReadAsStringAsync();
                 return JsonConvert.DeserializeObject<T>(json);

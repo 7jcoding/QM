@@ -17,7 +17,7 @@ namespace QM.Manager.ViewModels {
 
         public Dictionary<string, string> Datas { get; set; }
 
-        public async override void Update() {
+        public async override Task Update() {
             var metadata = await ApiClient.Instance.Execute(new GetMetadata());
             this.Datas = metadata;
             this.NotifyOfPropertyChange(() => this.Datas);

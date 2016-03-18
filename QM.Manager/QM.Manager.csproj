@@ -85,6 +85,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AppBootstrapper.cs" />
+    <Compile Include="DateTimeOffsetConverter.cs" />
     <Compile Include="Common\BaseScreen.cs" />
     <Compile Include="IShell.cs" />
     <Compile Include="ViewModels\MetadataViewModel.cs" />
@@ -93,9 +94,16 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ViewModels\TriggerDetailViewModel.cs" />
     <Compile Include="ViewModels\TriggerListViewModel.cs" />
     <Compile Include="Views\MetadataView.xaml.cs">
       <DependentUpon>MetadataView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TriggerDetailView.xaml.cs">
+      <DependentUpon>TriggerDetailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TriggerListView.xaml.cs">
+      <DependentUpon>TriggerListView.xaml</DependentUpon>
     </Compile>
     <Page Include="Scroll.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -110,6 +118,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ShellView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TriggerDetailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TriggerListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -146,6 +162,10 @@
     <ProjectReference Include="..\QM.Server.ApiClient\QM.Server.ApiClient.csproj">
       <Project>{944f0e8b-b873-47e4-89d0-268f9974badb}</Project>
       <Name>QM.Server.ApiClient</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\QM.Server.WebApi.Entity\QM.Server.WebApi.Entity.csproj">
+      <Project>{108e3024-3963-47e6-b540-ad9c1d07ddf6}</Project>
+      <Name>QM.Server.WebApi.Entity</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

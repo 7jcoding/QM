@@ -13,6 +13,8 @@ namespace QM.Server.WebApi {
         public void Configuration(IAppBuilder appBuilder) {
             // Configure Web API for self-host. 
             var config = new HttpConfiguration();
+
+            config.MapHttpAttributeRoutes();
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",
@@ -21,6 +23,7 @@ namespace QM.Server.WebApi {
 
             config.EnableCors();
             appBuilder.UseWebApi(config);
+            config.EnsureInitialized();
         }
 
     }
