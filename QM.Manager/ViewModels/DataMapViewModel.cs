@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace QM.Manager.ViewModels {
-    public class JobDataMapViewModel : BaseScreen {
+    public class DataMapViewModel : BaseScreen {
         public override string Title {
             get {
                 return "参数列表";

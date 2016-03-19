@@ -29,12 +29,12 @@ namespace QM.Manager.ViewModels {
             }
         }
 
-        public JobDataMapViewModel JobDataMapVM { get; set; }
-        public JobDataMapViewModel TriggerDataMapVM { get; set; }
+        public DataMapViewModel JobDataMapVM { get; set; }
+        public DataMapViewModel TriggerDataMapVM { get; set; }
 
         public TriggerDetailViewModel() {
-            this.JobDataMapVM = new JobDataMapViewModel();
-            this.TriggerDataMapVM = new JobDataMapViewModel();
+            this.JobDataMapVM = new DataMapViewModel();
+            this.TriggerDataMapVM = new DataMapViewModel();
         }
 
         public async override Task Update() {

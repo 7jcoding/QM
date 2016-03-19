@@ -15,10 +15,10 @@ using System.Windows.Shapes;
 
 namespace QM.Manager.Views {
     /// <summary>
-    /// JobDataMapView.xaml 的交互逻辑
+    /// UploadView.xaml 的交互逻辑
     /// </summary>
-    public partial class JobDataMapView : UserControl {
-        public JobDataMapView() {
+    public partial class UploadView : UserControl {
+        public UploadView() {
             InitializeComponent();
         }
     }

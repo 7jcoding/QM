@@ -58,13 +58,9 @@ namespace QM.Manager.ViewModels {
             await this.Show(new TriggerListViewModel());
         }
 
-        //public void ShowAllJobs() {
-        //    this.Show(new ListJobsViewModel());
-        //}
-
-        //public void ShowRunningJobs() {
-
-        //}
+        public async void ShowAllJobs() {
+            await this.Show(new JobListViewModel());
+        }
 
         //public void ShowListeners() {
         //    this.Show(new ListListenerViewModel());

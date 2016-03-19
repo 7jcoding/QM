@@ -41,6 +41,10 @@ namespace QM.Manager.Common {
         [Char('\uf01d')]
         Play,
         [Char('\uf28c')]
-        Pause
+        Pause,
+        [Char('\uf093')]
+        Upload,
+        [Char('\uf067')]
+        Add
     }
 }

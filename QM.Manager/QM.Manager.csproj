@@ -85,11 +85,12 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AppBootstrapper.cs" />
-    <Compile Include="Common\Class1.cs" />
+    <Compile Include="Common\FontAwesome.cs" />
     <Compile Include="DateTimeOffsetConverter.cs" />
     <Compile Include="Common\BaseScreen.cs" />
     <Compile Include="IShell.cs" />
-    <Compile Include="ViewModels\JobDataMapViewModel.cs" />
+    <Compile Include="ViewModels\DataMapViewModel.cs" />
+    <Compile Include="ViewModels\JobListViewModel.cs" />
     <Compile Include="ViewModels\MetadataViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="App.xaml.cs">
@@ -98,8 +99,12 @@
     </Compile>
     <Compile Include="ViewModels\TriggerDetailViewModel.cs" />
     <Compile Include="ViewModels\TriggerListViewModel.cs" />
-    <Compile Include="Views\JobDataMapView.xaml.cs">
-      <DependentUpon>JobDataMapView.xaml</DependentUpon>
+    <Compile Include="ViewModels\UploadViewModel.cs" />
+    <Compile Include="Views\DataMapView.xaml.cs">
+      <DependentUpon>DataMapView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\JobListView.xaml.cs">
+      <DependentUpon>JobListView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MetadataView.xaml.cs">
       <DependentUpon>MetadataView.xaml</DependentUpon>
@@ -110,6 +115,9 @@
     <Compile Include="Views\TriggerListView.xaml.cs">
       <DependentUpon>TriggerListView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\UploadView.xaml.cs">
+      <DependentUpon>UploadView.xaml</DependentUpon>
+    </Compile>
     <Page Include="Scroll.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -118,7 +126,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\JobDataMapView.xaml">
+    <Page Include="Views\DataMapView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\JobListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -135,6 +147,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\TriggerListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UploadView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -59,6 +59,8 @@
     <Compile Include="Attributes\EnumParamAttribute.cs" />
     <Compile Include="BaseMethod.cs" />
     <Compile Include="Class1.cs" />
+    <Compile Include="Methods\GetJob.cs" />
+    <Compile Include="Methods\GetJobs.cs" />
     <Compile Include="Methods\GetMetadata.cs" />
     <Compile Include="Methods\GetTrigger.cs" />
     <Compile Include="Methods\GetTriggers.cs" />
