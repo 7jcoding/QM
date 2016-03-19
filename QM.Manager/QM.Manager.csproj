@@ -85,7 +85,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AppBootstrapper.cs" />
+    <Compile Include="Common\DialogRequest.cs" />
     <Compile Include="Common\FontAwesome.cs" />
+    <Compile Include="Common\RegistAttribute.cs" />
     <Compile Include="DateTimeOffsetConverter.cs" />
     <Compile Include="Common\BaseScreen.cs" />
     <Compile Include="IShell.cs" />

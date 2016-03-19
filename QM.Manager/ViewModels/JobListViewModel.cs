@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using Caliburn.Micro;
+using Microsoft.Win32;
 using QM.Manager.Common;
 using QM.Server.ApiClient;
 using QM.Server.ApiClient.Methods;
@@ -10,6 +11,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace QM.Manager.ViewModels {
+
+    [Regist(InstanceMode.Singleton)]
     public class JobListViewModel : BaseScreen {
         public override string Title {
             get {
@@ -32,7 +35,15 @@ namespace QM.Manager.ViewModels {
 
         public DataMapViewModel DataMapVM { get; set; }
 
-        public JobListViewModel() {
+        private SimpleContainer Container = null;
+
+        private IEventAggregator EventAggregator = null;
+
+        public JobListViewModel(SimpleContainer container, IEventAggregator eag) {
+            this.Container = container;
+            this.EventAggregator = eag;
+            this.EventAggregator.Subscribe(this);
+
             this.DataMapVM = new DataMapViewModel();
         }
 
@@ -43,13 +54,12 @@ namespace QM.Manager.ViewModels {
         }
 
         public void Upload() {
-            var dlg = new OpenFileDialog() {
-                Title = "打包上传任务",
-                Filter = "zip|*.zip"
-            };
-            if (dlg.ShowDialog() == true) {
-                var file = dlg.FileName;
-            }
+            var vm = this.Container.GetInstance<UploadViewModel>();
+            this.EventAggregator.PublishOnUIThreadAsync(new OpenDialogRequest() {
+                VM = vm,
+                Height = 150,
+                Width = 500
+            });
         }
     }
 }

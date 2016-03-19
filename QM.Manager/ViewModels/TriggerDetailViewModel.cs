@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 using System.Windows;
 
 namespace QM.Manager.ViewModels {
+
+    [Regist(InstanceMode.Singleton)]
     public class TriggerDetailViewModel : BaseScreen {
         public override string Title {
             get {

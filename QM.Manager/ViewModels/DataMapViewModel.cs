@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace QM.Manager.ViewModels {
+
+    [Regist(InstanceMode.None)]
     public class DataMapViewModel : BaseScreen {
         public override string Title {
             get {

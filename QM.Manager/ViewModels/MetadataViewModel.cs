@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace QM.Manager.ViewModels {
+
+    [Regist(InstanceMode.Singleton)]
     public class MetadataViewModel : BaseScreen {
         public override string Title {
             get {

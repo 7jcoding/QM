@@ -12,6 +12,8 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
 namespace QM.Manager.ViewModels {
+
+    [Regist(InstanceMode.Singleton)]
     public class TriggerListViewModel : BaseScreen {
         public override string Title {
             get {
@@ -34,8 +36,8 @@ namespace QM.Manager.ViewModels {
             }
         }
 
-        public TriggerListViewModel() {
-            this.TriggerDetailVM = new TriggerDetailViewModel();
+        public TriggerListViewModel(SimpleContainer container) {
+            this.TriggerDetailVM = container.GetInstance<TriggerDetailViewModel>();
         }
 
         public async override Task Update() {

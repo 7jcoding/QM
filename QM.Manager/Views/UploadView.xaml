@@ -4,13 +4,26 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:QM.Manager.Views"
+             xmlns:ac="clr-namespace:AsNum.Common.WPF;assembly=AsNum.Common.WPF"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
+    <Grid ac:UniPadding.Padding="5">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="auto" />
+        </Grid.ColumnDefinitions>
+
+
+        <TextBox x:Name="File" HorizontalAlignment="Stretch" />
+        <Button x:Name="ChoiceFile" Content="选择文件" HorizontalAlignment="Right" Grid.Column="1" Width="100" />
+
+        <TextBlock Text="解压路径，如果不填写，默认为压缩包的名称，根目录为：$/Jobs" Grid.Row="1" Grid.ColumnSpan="2" />
+        <TextBox x:Name="SavePath" Grid.Row="2" />
+        <Button x:Name="Upload" Grid.Row="2" Grid.Column="1" Content="上传" HorizontalAlignment="Right" Width="100" />
     </Grid>
 </UserControl>

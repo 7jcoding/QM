@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace QM.Manager.ViewModels {
-    public class ShellViewModel : Screen, IShell {
+    public class ShellViewModel : Screen, IShell, IHandle<OpenDialogRequest> {
 
         public BaseScreen CurrentVM {
             get;
@@ -39,7 +39,14 @@ namespace QM.Manager.ViewModels {
             set;
         }
 
-        public ShellViewModel() {
+        private SimpleContainer Container = null;
+        private IEventAggregator EventAggregator = null;
+
+        public ShellViewModel(SimpleContainer container, IEventAggregator eag) {
+            this.Container = container;
+            this.EventAggregator = eag;
+            this.EventAggregator.Subscribe(this);
+
             //var connectVM = new ConnectViewModel();
             //connectVM.PropertyChanged += ConnectVM_PropertyChanged;
             //this.ShowDialog(connectVM, 400, 170);
@@ -55,19 +62,21 @@ namespace QM.Manager.ViewModels {
         //}
 
         public async void ShowTriggers() {
-            await this.Show(new TriggerListViewModel());
+            var vm = this.Container.GetInstance<TriggerListViewModel>();
+            await this.Show(vm);
         }
 
         public async void ShowAllJobs() {
-            await this.Show(new JobListViewModel());
+            var vm = this.Container.GetInstance<JobListViewModel>();
+            await this.Show(vm);
         }
 
         //public void ShowListeners() {
         //    this.Show(new ListListenerViewModel());
         //}
 
-        public void ShowMetadata() {
-            this.ShowDialog(new MetadataViewModel(), 700, 500);
+        public async void ShowMetadata() {
+            await this.ShowDialog(new MetadataViewModel(), 700, 500);
         }
 
         //public void ShowAddJob(EditJobViewModel vm = null) {
@@ -89,9 +98,9 @@ namespace QM.Manager.ViewModels {
             this.NotifyOfPropertyChange(() => this.CurrentVM);
         }
 
-        public void ShowDialog(BaseScreen screen, int width, int height) {
+        public async Task ShowDialog(BaseScreen screen, int width, int height) {
             this.DialogVM = screen;
-            this.DialogVM.Update();
+            await this.DialogVM.Update();
 
             this.IsShowDialog = true;
             this.DialogTitle = screen.DisplayName;
@@ -108,6 +117,10 @@ namespace QM.Manager.ViewModels {
         public void HideDialog() {
             this.IsShowDialog = false;
             this.NotifyOfPropertyChange(() => this.IsShowDialog);
+        }
+
+        public async void Handle(OpenDialogRequest message) {
+            await this.ShowDialog(message.VM, message.Width, message.Height);
         }
     }
 }
