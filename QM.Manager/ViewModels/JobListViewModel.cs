@@ -53,12 +53,21 @@ namespace QM.Manager.ViewModels {
             this.NotifyOfPropertyChange(() => this.Datas);
         }
 
-        public void Upload() {
+        public async void Upload() {
             var vm = this.Container.GetInstance<UploadViewModel>();
-            this.EventAggregator.PublishOnUIThreadAsync(new OpenDialogRequest() {
+            await this.EventAggregator.PublishOnUIThreadAsync(new OpenDialogRequest() {
                 VM = vm,
                 Height = 150,
                 Width = 500
+            });
+        }
+
+        public async void Add() {
+            var vm = this.Container.GetInstance<JobEditorViewModel>();
+            await this.EventAggregator.PublishOnUIThreadAsync(new OpenDialogRequest() {
+                VM = vm,
+                Height = 500,
+                Width = 700
             });
         }
     }

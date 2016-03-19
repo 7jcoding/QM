@@ -50,7 +50,7 @@
             <ToolBarTray Grid.Row="0" Grid.ColumnSpan="3">
                 <ToolBar>
                     <Button x:Name="Upload" Content="{common:FontAwesome Font=Upload}" />
-                    <Button Content="{common:FontAwesome Font=Add}" />
+                    <Button x:Name="Add" Content="{common:FontAwesome Font=Add}" />
                     <Button Content="{common:FontAwesome Font=Edit}" />
                     <Separator />
                     <Button Content="{common:FontAwesome Font=Remove}" />

@@ -92,6 +92,7 @@
     <Compile Include="Common\BaseScreen.cs" />
     <Compile Include="IShell.cs" />
     <Compile Include="ViewModels\DataMapViewModel.cs" />
+    <Compile Include="ViewModels\JobEditorViewModel.cs" />
     <Compile Include="ViewModels\JobListViewModel.cs" />
     <Compile Include="ViewModels\MetadataViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
@@ -104,6 +105,9 @@
     <Compile Include="ViewModels\UploadViewModel.cs" />
     <Compile Include="Views\DataMapView.xaml.cs">
       <DependentUpon>DataMapView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\JobEditorView.xaml.cs">
+      <DependentUpon>JobEditorView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\JobListView.xaml.cs">
       <DependentUpon>JobListView.xaml</DependentUpon>
@@ -129,6 +133,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\DataMapView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\JobEditorView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
