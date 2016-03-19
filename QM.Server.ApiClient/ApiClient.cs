@@ -38,7 +38,7 @@ namespace QM.Server.ApiClient {
                 throw new MethodValidationException(results);
             }
 
-            var content = method.GetContent();
+            using (var content = method.GetContent())
             using (var client = new HttpClient()) {
                 var request = new HttpRequestMessage(method.HttpMethod, this.BuildUri(method, content));
                 if (content != null)

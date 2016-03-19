@@ -108,7 +108,7 @@
     <Compile Include="Controller\JobsController.cs" />
     <Compile Include="Controller\MetadataController.cs" />
     <Compile Include="Controller\TriggersController.cs" />
-    <Compile Include="Controller\TypesController.cs" />
+    <Compile Include="Controller\UploadController.cs" />
     <Compile Include="Models\UserInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

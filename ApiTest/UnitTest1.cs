@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using QM.Server.ApiClient.Methods;
 using QM.Server.ApiClient;
+using System.IO;
 
 namespace ApiTest {
     [TestClass]
@@ -15,6 +16,15 @@ namespace ApiTest {
             };
 
             var trigger = ApiClient.Instance.Execute(mth).Result;
+        }
+
+        [TestMethod]
+        public void UploadTest() {
+            var mth = new Upload() {
+                FilePath = @"d:\111.zip",
+                Name = "Resume"
+            };
+            var result = ApiClient.Instance.Execute(mth).Result;
         }
     }
 }
