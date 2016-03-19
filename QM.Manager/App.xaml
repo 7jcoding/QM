@@ -9,6 +9,12 @@
                     <local:AppBootstrapper x:Key="bootstrapper" />
                 </ResourceDictionary>
                 <ResourceDictionary Source="./Style.xaml" />
+                <ResourceDictionary>
+                    <FontFamily x:Key="Awesome">pack://application:,,,/Fonts/#FontAwesome</FontFamily>
+                    <!--<Style x:Key="FontAwesome">
+                        <Setter Property="TextElement.FontFamily" Value="pack://application:,,,/Fonts/#FontAwesome" />
+                    </Style>-->
+                </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

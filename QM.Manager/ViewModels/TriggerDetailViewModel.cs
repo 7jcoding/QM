@@ -17,7 +17,25 @@ namespace QM.Manager.ViewModels {
             }
         }
 
-        public TriggerInfo Data { get; private set; }
+        private TriggerInfo _data = null;
+        public TriggerInfo Data {
+            get {
+                return this._data;
+            }
+            private set {
+                this._data = value;
+                this.JobDataMapVM.Update(value != null ? value.JobDataMap : null);
+                this.TriggerDataMapVM.Update(value != null ? value.TriggerDataMap : null);
+            }
+        }
+
+        public JobDataMapViewModel JobDataMapVM { get; set; }
+        public JobDataMapViewModel TriggerDataMapVM { get; set; }
+
+        public TriggerDetailViewModel() {
+            this.JobDataMapVM = new JobDataMapViewModel();
+            this.TriggerDataMapVM = new JobDataMapViewModel();
+        }
 
         public async override Task Update() {
             if (this.Data == null)

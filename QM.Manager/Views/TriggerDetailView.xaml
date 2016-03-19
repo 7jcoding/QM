@@ -6,10 +6,15 @@
              xmlns:cm="http://www.caliburnproject.org"
              xmlns:ac="clr-namespace:AsNum.Common.WPF;assembly=AsNum.Common.WPF"
              xmlns:local="clr-namespace:QM.Manager"             
+             xmlns:common="clr-namespace:QM.Manager.Common"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
         <local:DateTimeOffsetConverter x:Key="DFC" />
+        <Style TargetType="ToolBar" BasedOn="{StaticResource {x:Type ToolBar}}">
+            <Setter Property="ToolBar.FontFamily" Value="{StaticResource Awesome}" />
+            <Setter Property="FontSize" Value="20" />
+        </Style>
     </UserControl.Resources>
     <Grid ac:UniPadding.Padding="2">
         <Grid.RowDefinitions>
@@ -19,20 +24,30 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
-            <RowDefinition />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto" />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
-        <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Orientation="Horizontal" ac:UniPadding.Padding="2">
-            <Button x:Name="Pause" Content="挂起" IsEnabled="{Binding CanPause}" Width="50" />
-            <Button x:Name="Resume" Content="运行" IsEnabled="{Binding CanResume}" Width="50" />
-            <Button x:Name="Interrupt" Content="立即中断" Width="60" />
-            <Button x:Name="Edit" Content="编辑" IsEnabled="{Binding CanDelete}" Width="50" />
-            <Button x:Name="Delete" Content="删除" IsEnabled="{Binding CanDelete}" Width="50" />
-        </StackPanel>
+
+        <ToolBarTray Grid.Row="0" Grid.ColumnSpan="2" ac:UniPadding.Padding="2">
+            <ToolBar>
+                <Button x:Name="Update" Content="{common:FontAwesome Font=Refresh}" />
+                <Button x:Name="Edit" Content="{common:FontAwesome Font=Edit}"  IsEnabled="{Binding CanDelete}"  />
+                <Separator />
+                <Button x:Name="Pause" Content="{common:FontAwesome Font=Pause}"  IsEnabled="{Binding CanPause}" />
+                <Button x:Name="Resume" Content="{common:FontAwesome Font=Play}"  IsEnabled="{Binding CanResume}" />
+                <Button x:Name="Interrupt" Content="{common:FontAwesome Font=Stop}"  />
+                <Separator />
+                <Button x:Name="Delete" Content="{common:FontAwesome Font=Remove}" IsEnabled="{Binding CanDelete}"  />
+            </ToolBar>
+        </ToolBarTray>
 
         <Label Content="状态" Grid.Row="1" Grid.Column="0" />
         <TextBlock Text="{Binding Data.State}"  Grid.Row="1" Grid.Column="1" />
@@ -49,6 +64,10 @@
         <Label Content="任务描述" Grid.Row="5" Grid.Column="0" />
         <TextBlock Text="{Binding Data.JobDesc}" Grid.Row="5" Grid.Column="1" />
 
-        <ContentControl Grid.Row="6" x:Name="JobDataMapVM" Grid.ColumnSpan="2" />
+        <Label Content="任务参数" Grid.Row="6" Grid.ColumnSpan="2" />
+        <ContentControl Grid.Row="7" x:Name="JobDataMapVM" Grid.ColumnSpan="2" />
+
+        <Label Content="触发器参数" Grid.Row="8" Grid.ColumnSpan="2" />
+        <ContentControl Grid.Row="9" x:Name="TriggerDataMapVM" Grid.ColumnSpan="2" />
     </Grid>
 </UserControl>

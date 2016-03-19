@@ -14,7 +14,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
             <ColumnDefinition Width="auto" />
-            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="300" />
         </Grid.ColumnDefinitions>
 
         <DataGrid x:Name="Datas" 
