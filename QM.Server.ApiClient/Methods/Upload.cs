@@ -38,7 +38,7 @@ namespace QM.Server.ApiClient.Methods {
             var fileContent = new ByteArrayContent(File.ReadAllBytes(this.FilePath));
             content.Add(fileContent, "file", Path.GetFileName(this.FilePath));
 
-            var nameContent = new StringContent(this.Name);
+            var nameContent = new StringContent(this.Name ?? "");
             content.Add(nameContent, "name");
 
             var str = content.ReadAsStringAsync().Result;

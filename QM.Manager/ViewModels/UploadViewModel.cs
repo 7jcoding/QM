@@ -1,10 +1,14 @@
 ﻿using Microsoft.Win32;
 using QM.Manager.Common;
+using QM.Server.ApiClient;
+using QM.Server.ApiClient.Methods;
+using QM.Server.WebApi.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace QM.Manager.ViewModels {
 
@@ -36,8 +40,17 @@ namespace QM.Manager.ViewModels {
             }
         }
 
-        public void Upload() {
-
+        public async void Upload() {
+            var mth1 = new UploadPrevCheck(this.SavePath, this.File);
+            var result = await ApiClient.Instance.Execute(mth1);
+            if (result == UploadStates.Success) {
+                var mth2 = new Upload() {
+                    FilePath = this.File,
+                    Name = this.SavePath
+                };
+                result = await ApiClient.Instance.Execute(mth2);
+            }
+            MessageBox.Show(result.ToString());
         }
     }
 }

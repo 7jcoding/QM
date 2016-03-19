@@ -65,6 +65,7 @@
     <Compile Include="Methods\GetTrigger.cs" />
     <Compile Include="Methods\GetTriggers.cs" />
     <Compile Include="Methods\Upload.cs" />
+    <Compile Include="Methods\UploadPrevCheck.cs" />
     <Compile Include="MethodValidationException.cs" />
     <Compile Include="ParamHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -25,6 +25,8 @@ namespace ApiTest {
                 Name = "Resume"
             };
             var result = ApiClient.Instance.Execute(mth).Result;
+            var mth2 = new UploadPrevCheck("Resume");
+            var result2 = ApiClient.Instance.Execute(mth2).Result;
         }
     }
 }

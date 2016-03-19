@@ -45,11 +45,15 @@ namespace QM.Server.WebApi.Controller {
                     name = Path.GetFileNameWithoutExtension(file.Headers.ContentDisposition.FileName);
                 }
 
-                var targetDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Jobs", name);
-                if (Directory.Exists(targetDir)) {
-                    return UploadStates.NameExists;
-                }
+                //var targetDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Jobs", name);
+                //if (Directory.Exists(targetDir)) {
+                //    return UploadStates.NameExists;
+                //}
+                var t = this.CheckName(name);
+                if (t != UploadStates.Success)
+                    return t;
 
+                var targetDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Jobs", name);
                 try {
                     ZipFile.ExtractToDirectory(file.LocalFileName, targetDir);
                 } catch {
@@ -64,6 +68,23 @@ namespace QM.Server.WebApi.Controller {
                     }
                 }
             }
+        }
+
+        [HttpGet]
+        public UploadStates CheckName(string name) {
+            if (string.IsNullOrWhiteSpace(name))
+                return UploadStates.InvalidName;
+
+            if (name.Intersect(Path.GetInvalidPathChars()).Any()) {
+                return UploadStates.InvalidName;
+            }
+
+            var targetDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Jobs", name);
+            if (Directory.Exists(targetDir)) {
+                return UploadStates.NameExists;
+            }
+
+            return UploadStates.Success;
         }
     }
 }
