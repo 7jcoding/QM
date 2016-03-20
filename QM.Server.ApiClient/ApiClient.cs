@@ -21,7 +21,7 @@ namespace QM.Server.ApiClient {
 
         }
 
-        private string BuildUri(BaseMethod mth, HttpContent content = null) {
+        public string BuildUri(BaseMethod mth, HttpContent content = null) {
             var url = string.Format("http://localhost:5556/api/{0}", mth.Model);
             if (content == null) {
                 return url.SetUrlKeyValue(mth.GetParams());
@@ -38,15 +38,17 @@ namespace QM.Server.ApiClient {
                 throw new MethodValidationException(results);
             }
 
-            using (var content = method.GetContent())
-            using (var client = new HttpClient()) {
-                var request = new HttpRequestMessage(method.HttpMethod, this.BuildUri(method, content));
-                if (content != null)
-                    request.Content = content;
-                var rep = await client.SendAsync(request);
-                var json = await rep.Content.ReadAsStringAsync();
-                return JsonConvert.DeserializeObject<T>(json);
-            }
+            return await method.Execute(this);
+
+            //using (var content = method.GetContent())
+            //using (var client = new HttpClient()) {
+            //    var request = new HttpRequestMessage(method.HttpMethod, this.BuildUri(method, content));
+            //    if (content != null)
+            //        request.Content = content;
+            //    var rep = await client.SendAsync(request);
+            //    var json = await rep.Content.ReadAsStringAsync();
+            //    return JsonConvert.DeserializeObject<T>(json);
+            //}
         }
     }
 }

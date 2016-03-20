@@ -104,10 +104,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Class1.cs" />
     <Compile Include="Controller\ConnectController.cs" />
     <Compile Include="Controller\JobsController.cs" />
     <Compile Include="Controller\MetadataController.cs" />
     <Compile Include="Controller\TriggersController.cs" />
+    <Compile Include="Controller\DiscoverController.cs" />
     <Compile Include="Controller\UploadController.cs" />
     <Compile Include="Models\UserInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -121,6 +123,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\QM.Common\QM.Common.csproj">
+      <Project>{fe886780-9672-47fc-9484-3bd503234e02}</Project>
+      <Name>QM.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\QM.Server.WebApi.Entity\QM.Server.WebApi.Entity.csproj">
       <Project>{108e3024-3963-47e6-b540-ad9c1d07ddf6}</Project>
       <Name>QM.Server.WebApi.Entity</Name>

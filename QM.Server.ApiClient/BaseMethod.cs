@@ -1,4 +1,5 @@
 ﻿using Microsoft.Practices.EnterpriseLibrary.Validation;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,9 +43,30 @@ namespace QM.Server.ApiClient {
         protected virtual IEnumerable<string> InnerValidate() {
             return Enumerable.Empty<string>();
         }
+
+        protected async virtual Task<byte[]> GetResult(ApiClient client) {
+            using (var content = this.GetContent())
+            using (var hc = new HttpClient()) {
+                var request = new HttpRequestMessage(this.HttpMethod, client.BuildUri(this, content));
+                if (content != null)
+                    request.Content = content;
+                var rep = await hc.SendAsync(request);
+                return await rep.Content.ReadAsByteArrayAsync();
+            }
+        }
     }
 
     public abstract class BaseMethod<T> : BaseMethod {
 
+        protected virtual T Parse(byte[] result) {
+            var json = Encoding.UTF8.GetString(result);
+            return JsonConvert.DeserializeObject<T>(json);
+        }
+
+
+        internal async Task<T> Execute(ApiClient client) {
+            var bytes = await this.GetResult(client);
+            return this.Parse(bytes);
+        }
     }
 }

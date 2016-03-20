@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace QM.Manager.ViewModels {
-    public class ShellViewModel : Screen, IShell, IHandle<OpenDialogRequest> {
+    public class ShellViewModel : Screen, IShell, IHandle<OpenRequest> {
 
         public BaseScreen CurrentVM {
             get;
@@ -119,8 +119,11 @@ namespace QM.Manager.ViewModels {
             this.NotifyOfPropertyChange(() => this.IsShowDialog);
         }
 
-        public async void Handle(OpenDialogRequest message) {
-            await this.ShowDialog(message.VM, message.Width, message.Height);
+        public async void Handle(OpenRequest message) {
+            if (message.OpenAsDialog)
+                await this.ShowDialog(message.VM, message.Width ?? 800, message.Height ?? 500);
+            else
+                await this.Show(message.VM);
         }
     }
 }

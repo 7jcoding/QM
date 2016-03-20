@@ -1,4 +1,5 @@
-﻿using QM.Manager.Common;
+﻿using Caliburn.Micro;
+using QM.Manager.Common;
 using QM.Server.ApiClient;
 using QM.Server.ApiClient.Methods;
 using QM.Server.WebApi.Entity;
@@ -23,6 +24,15 @@ namespace QM.Manager.ViewModels {
 
         public JobInfo Data { get; set; }
 
+        private SimpleContainer _container = null;
+        private IEventAggregator _eag = null;
+
+        public JobEditorViewModel(SimpleContainer container, IEventAggregator eag) {
+            this._container = container;
+            this._eag = eag;
+            this._eag.Subscribe(this);
+        }
+
         public async override Task Update() {
             if (string.IsNullOrWhiteSpace(this.Name))
                 this.Data = null;
@@ -40,6 +50,15 @@ namespace QM.Manager.ViewModels {
             this.Name = name;
             this.Group = group;
             await this.Update();
+        }
+
+        public async void ChoiceDll() {
+            var vm = this._container.GetInstance<ChoiceDllViewModel>();
+            await this._eag.PublishOnUIThreadAsync(new OpenRequest() {
+                VM = vm,
+                OpenAsDialog = true
+            });
+            await vm.Update();
         }
     }
 }

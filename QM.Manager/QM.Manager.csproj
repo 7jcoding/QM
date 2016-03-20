@@ -85,12 +85,13 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AppBootstrapper.cs" />
-    <Compile Include="Common\DialogRequest.cs" />
+    <Compile Include="Common\OpenRequest.cs" />
     <Compile Include="Common\FontAwesome.cs" />
     <Compile Include="Common\RegistAttribute.cs" />
     <Compile Include="DateTimeOffsetConverter.cs" />
     <Compile Include="Common\BaseScreen.cs" />
     <Compile Include="IShell.cs" />
+    <Compile Include="ViewModels\ChoiceDllViewModel.cs" />
     <Compile Include="ViewModels\DataMapViewModel.cs" />
     <Compile Include="ViewModels\JobEditorViewModel.cs" />
     <Compile Include="ViewModels\JobListViewModel.cs" />
@@ -103,6 +104,9 @@
     <Compile Include="ViewModels\TriggerDetailViewModel.cs" />
     <Compile Include="ViewModels\TriggerListViewModel.cs" />
     <Compile Include="ViewModels\UploadViewModel.cs" />
+    <Compile Include="Views\ChoiceDllView.xaml.cs">
+      <DependentUpon>ChoiceDllView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\DataMapView.xaml.cs">
       <DependentUpon>DataMapView.xaml</DependentUpon>
     </Compile>
@@ -131,6 +135,10 @@
     <Page Include="Style.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ChoiceDllView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\DataMapView.xaml">
       <SubType>Designer</SubType>

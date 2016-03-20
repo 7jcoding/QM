@@ -55,8 +55,9 @@ namespace QM.Manager.ViewModels {
 
         public async void Upload() {
             var vm = this.Container.GetInstance<UploadViewModel>();
-            await this.EventAggregator.PublishOnUIThreadAsync(new OpenDialogRequest() {
+            await this.EventAggregator.PublishOnUIThreadAsync(new OpenRequest() {
                 VM = vm,
+                OpenAsDialog = true,
                 Height = 150,
                 Width = 500
             });
@@ -64,10 +65,8 @@ namespace QM.Manager.ViewModels {
 
         public async void Add() {
             var vm = this.Container.GetInstance<JobEditorViewModel>();
-            await this.EventAggregator.PublishOnUIThreadAsync(new OpenDialogRequest() {
-                VM = vm,
-                Height = 500,
-                Width = 700
+            await this.EventAggregator.PublishOnUIThreadAsync(new OpenRequest() {
+                VM = vm
             });
         }
     }
