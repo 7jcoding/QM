@@ -7,14 +7,66 @@
              xmlns:ac="clr-namespace:AsNum.Common.WPF;assembly=AsNum.Common.WPF"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
+    <Grid ac:UniPadding.Padding="5">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
             <RowDefinition />
+            <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
-        <StackPanel Orientation="Horizontal" ac:UniPadding.Padding="5">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Orientation="Horizontal" ac:UniPadding.Padding="5" Grid.ColumnSpan="2">
+            <Button x:Name="Upload" Content="上传" Width="100" />
             <Button x:Name="ChoiceDll" Content="选择DLL" Width="100" />
-            <ComboBox x:Name="Types" />
+            <ComboBox x:Name="Types" SelectedValue="{Binding CurrentType}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <Label Content="{Binding Desc}" />
+                            <Label Content="{Binding Name}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
         </StackPanel>
+
+        <Label Content="名称" Grid.Row="1" />
+        <TextBox x:Name="Name" Grid.Row="1" Grid.Column="1" />
+
+        <Label Content="分组" Grid.Row="2" />
+        <TextBox x:Name="Group" Grid.Row="2" Grid.Column="1" />
+
+        <Label Content="描述" Grid.Row="3" />
+        <TextBox x:Name="Desc" Grid.Row="3" Grid.Column="1" />
+
+        <Label Content="可恢复" Grid.Row="4" />
+        <CheckBox x:Name="ShouldRecover" Grid.Row="4" Grid.Column="1" />
+
+        <Label Content="持久化" Grid.Row="5" />
+        <CheckBox x:Name="Durability" Grid.Row="5" Grid.Column="1" />
+
+        <Label Content="替换已有任务" Grid.Row="6" />
+        <CheckBox x:Name="Replace" Grid.Row="6" Grid.Column="1" />
+
+        <Label Content="参数" Grid.Row="7" />
+        <DataGrid x:Name="DataMap" Grid.Row="7" Grid.Column="1" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Name}" Header="名称" IsReadOnly="True" />
+                <DataGridTextColumn Binding="{Binding Type}" Header="类型" IsReadOnly="True" />
+                <DataGridTextColumn Binding="{Binding Value}" Header="值" />
+                <DataGridTextColumn Binding="{Binding Desc}" Header="描述" IsReadOnly="True" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Button Content="保存" x:Name="Save" HorizontalAlignment="Right" Width="100" Grid.Row="8" Grid.ColumnSpan="2" />
     </Grid>
 </UserControl>

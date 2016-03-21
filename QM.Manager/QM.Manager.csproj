@@ -85,6 +85,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AppBootstrapper.cs" />
+    <Compile Include="Common\HideDialogRequest.cs" />
     <Compile Include="Common\OpenRequest.cs" />
     <Compile Include="Common\FontAwesome.cs" />
     <Compile Include="Common\RegistAttribute.cs" />

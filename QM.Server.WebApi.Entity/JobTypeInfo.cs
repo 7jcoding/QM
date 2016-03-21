@@ -9,6 +9,10 @@ namespace QM.Server.WebApi.Entity {
 
         public string FullName { get; set; }
 
+        public string AssemblyQualifiedName { get; set; }
+
+        public string AssemblyFile { get; set; }
+
         public string Name { get; set; }
 
         public string Desc { get; set; }

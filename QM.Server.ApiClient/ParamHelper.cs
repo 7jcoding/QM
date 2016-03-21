@@ -11,8 +11,8 @@ using System.Threading.Tasks;
 namespace QM.Server.ApiClient {
     internal static class ParameterHelper {
 
-        public static Dictionary<string, string> GetParams(this BaseMethod method) {
-            var dic = new Dictionary<string, string>();
+        public static Dictionary<string, object> GetParams(this BaseMethod method) {
+            var dic = new Dictionary<string, object>();
             var props = method.GetType().GetRuntimeProperties().Where(p => p.GetCustomAttributes(typeof(ParamAttribute), true).Count() > 0);
             foreach (var p in props) {
                 var pa = (ParamAttribute)p.GetCustomAttributes(typeof(ParamAttribute), true).First();
@@ -43,10 +43,10 @@ namespace QM.Server.ApiClient {
             return new StringContent(str);
         }
 
-        public static FormUrlEncodedContent GetFormUrlEncodedContent(this BaseMethod method) {
-            var dic = method.GetParams();
-            return new FormUrlEncodedContent(dic);
-        }
+        //public static FormUrlEncodedContent GetFormUrlEncodedContent(this BaseMethod method) {
+        //    var dic = method.GetParams();
+        //    return new FormUrlEncodedContent(dic);
+        //}
 
         /// <summary>
         /// 将参数编进URL
@@ -57,7 +57,7 @@ namespace QM.Server.ApiClient {
         public static string BuildUrl(this BaseMethod method, string url) {
             var dic = method.GetParams();
             foreach (var kv in dic)
-                url = url.SetUrlKeyValue(kv.Key, WebUtility.UrlEncode(kv.Value));
+                url = url.SetUrlKeyValue(kv.Key, WebUtility.UrlEncode(kv.Value.ToString()));
 
             return url;
         }

@@ -70,7 +70,9 @@ namespace QM.Server.WebApi.Controller {
                         Desc = desc != null ? desc.Description : "",
                         FullName = t.FullName,
                         Name = t.Name,
-                        Params = this.GetJobParametersFromJobType(t)
+                        Params = this.GetJobParametersFromJobType(t),
+                        AssemblyQualifiedName = t.AssemblyQualifiedName,
+                        AssemblyFile = t.Assembly.Location
                     };
                 }
             }

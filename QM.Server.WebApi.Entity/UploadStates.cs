@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace QM.Server.WebApi.Entity {
     public enum UploadStates {
-        Success,
+        Success = 0,
         NotMutiPart,
         NoFileFoundFromRequest,
         NotZipFile,

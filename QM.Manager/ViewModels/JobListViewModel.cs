@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace QM.Manager.ViewModels {
 
@@ -53,21 +54,26 @@ namespace QM.Manager.ViewModels {
             this.NotifyOfPropertyChange(() => this.Datas);
         }
 
-        public async void Upload() {
-            var vm = this.Container.GetInstance<UploadViewModel>();
-            await this.EventAggregator.PublishOnUIThreadAsync(new OpenRequest() {
-                VM = vm,
-                OpenAsDialog = true,
-                Height = 150,
-                Width = 500
-            });
-        }
-
         public async void Add() {
             var vm = this.Container.GetInstance<JobEditorViewModel>();
             await this.EventAggregator.PublishOnUIThreadAsync(new OpenRequest() {
                 VM = vm
             });
+        }
+
+        public async void Delete() {
+            if (MessageBox.Show("确认要删除该任务吗？", "警告", MessageBoxButton.YesNo) == MessageBoxResult.Yes) {
+                var mth = new DeleteJob() {
+                    Name = this.Current.Name,
+                    Group = this.Current.Group
+                };
+                var result = await ApiClient.Instance.Execute(mth);
+
+                if (result)
+                    await this.Update();
+                else
+                    MessageBox.Show("删除失败");
+            }
         }
     }
 }

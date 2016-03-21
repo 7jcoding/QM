@@ -34,17 +34,17 @@ namespace QM.Server.ApiClient.Attributes {
             this.Required = true;
         }
 
-        public virtual Dictionary<string, string> GetParams(object obj, PropertyInfo p) {
+        public virtual Dictionary<string, object> GetParams(object obj, PropertyInfo p) {
             var value = p.GetValue(obj, null);
             if (value == null && this.Required)
-                return new Dictionary<string, string>(){
+                return new Dictionary<string, object>(){
                     {this.Name ?? p.Name, ""}
                 };
             else if (value == null && !this.Required)
                 return null;
             else
-                return new Dictionary<string, string>(){
-                    {this.Name ?? p.Name, p.GetValue(obj, null).ToString()}
+                return new Dictionary<string, object>(){
+                    {this.Name ?? p.Name, p.GetValue(obj, null)}
                 };
         }
     }

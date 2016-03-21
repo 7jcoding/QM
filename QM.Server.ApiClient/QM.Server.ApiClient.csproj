@@ -59,6 +59,7 @@
     <Compile Include="Attributes\EnumParamAttribute.cs" />
     <Compile Include="BaseMethod.cs" />
     <Compile Include="Class1.cs" />
+    <Compile Include="Methods\DeleteJob.cs" />
     <Compile Include="Methods\GetDlls.cs" />
     <Compile Include="Methods\GetJob.cs" />
     <Compile Include="Methods\GetJobs.cs" />
@@ -66,6 +67,7 @@
     <Compile Include="Methods\GetMetadata.cs" />
     <Compile Include="Methods\GetTrigger.cs" />
     <Compile Include="Methods\GetTriggers.cs" />
+    <Compile Include="Methods\SaveJob.cs" />
     <Compile Include="Methods\Upload.cs" />
     <Compile Include="Methods\UploadPrevCheck.cs" />
     <Compile Include="MethodValidationException.cs" />

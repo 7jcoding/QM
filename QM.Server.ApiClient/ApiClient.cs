@@ -24,7 +24,7 @@ namespace QM.Server.ApiClient {
         public string BuildUri(BaseMethod mth, HttpContent content = null) {
             var url = string.Format("http://localhost:5556/api/{0}", mth.Model);
             if (content == null) {
-                return url.SetUrlKeyValue(mth.GetParams());
+                return url.SetUrlKeyValue(mth.GetParams().ToDictionary(d => d.Key, d => d.Value.ToString()));
             } else
                 return url;
         }

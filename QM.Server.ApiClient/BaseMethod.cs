@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -18,7 +19,19 @@ namespace QM.Server.ApiClient {
             get;
         }
 
+        protected virtual object GetSendData() {
+            //return this.GetParams();
+            return null;
+        }
+
         public virtual HttpContent GetContent() {
+            var data = this.GetSendData();
+            if (data != null) {
+                var json = JsonConvert.SerializeObject(data);
+                var content = new StringContent(json);
+                content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json");
+                return content;
+            }
             return null;
         }
 
@@ -48,8 +61,12 @@ namespace QM.Server.ApiClient {
             using (var content = this.GetContent())
             using (var hc = new HttpClient()) {
                 var request = new HttpRequestMessage(this.HttpMethod, client.BuildUri(this, content));
-                if (content != null)
+                if (content != null) {
                     request.Content = content;
+
+                    var bytes = await request.Content.ReadAsByteArrayAsync();
+                    var t = Encoding.UTF8.GetString(bytes);
+                }
                 var rep = await hc.SendAsync(request);
                 return await rep.Content.ReadAsByteArrayAsync();
             }

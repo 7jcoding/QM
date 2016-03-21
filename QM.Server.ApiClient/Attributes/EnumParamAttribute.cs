@@ -31,7 +31,7 @@ namespace QM.Server.ApiClient.Attributes {
             this.Use = use;
         }
 
-        public override Dictionary<string, string> GetParams(object obj, System.Reflection.PropertyInfo p) {
+        public override Dictionary<string, object> GetParams(object obj, System.Reflection.PropertyInfo p) {
             var value = p.GetValue(obj, null);
             if (value != null) {
                 var attr = value.GetType()
@@ -53,14 +53,14 @@ namespace QM.Server.ApiClient.Attributes {
 
 
             if (value == null && this.Required)
-                return new Dictionary<string, string>(){
+                return new Dictionary<string, object>(){
                     {this.Name, ""}
                 };
             else if (value == null && !this.Required)
                 return null;
             else
-                return new Dictionary<string, string>(){
-                    {this.Name, value.ToString()}
+                return new Dictionary<string, object>(){
+                    {this.Name, value}
                 };
         }
 

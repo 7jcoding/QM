@@ -11,6 +11,9 @@ namespace QM.Manager.ViewModels {
 
     [Regist(InstanceMode.Singleton)]
     public class ChoiceDllViewModel : BaseScreen {
+
+        public event EventHandler<ChoiceArgs> OnChoice = null;
+
         public override string Title {
             get {
                 return "选择DLL";
@@ -42,11 +45,20 @@ namespace QM.Manager.ViewModels {
             this.NotifyOfPropertyChange(() => this.Datas);
         }
 
-        public async void Choice() {
-            var mth = new GetJobTypes() {
-                DllPath = this.Current
-            };
-            var datas = await ApiClient.Instance.Execute(mth);
+        public void Choice() {
+            //var mth = new GetJobTypes() {
+            //    DllPath = this.Current
+            //};
+            //var datas = await ApiClient.Instance.Execute(mth);
+            if (this.OnChoice != null)
+                this.OnChoice.Invoke(this, new ChoiceArgs() {
+                    Dll = this.Current
+                });
+        }
+
+
+        public class ChoiceArgs : EventArgs {
+            public string Dll { get; set; }
         }
     }
 }
