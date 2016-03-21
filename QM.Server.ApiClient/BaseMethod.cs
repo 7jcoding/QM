@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -57,18 +58,17 @@ namespace QM.Server.ApiClient {
             return Enumerable.Empty<string>();
         }
 
-        protected async virtual Task<byte[]> GetResult(ApiClient client) {
+        protected async virtual Task<Tuple<HttpStatusCode, byte[]>> GetResult(ApiClient client) {
             using (var content = this.GetContent())
             using (var hc = new HttpClient()) {
                 var request = new HttpRequestMessage(this.HttpMethod, client.BuildUri(this, content));
                 if (content != null) {
                     request.Content = content;
-
-                    var bytes = await request.Content.ReadAsByteArrayAsync();
-                    var t = Encoding.UTF8.GetString(bytes);
                 }
+
                 var rep = await hc.SendAsync(request);
-                return await rep.Content.ReadAsByteArrayAsync();
+                var bytes = await rep.Content.ReadAsByteArrayAsync();
+                return new Tuple<HttpStatusCode, byte[]>(rep.StatusCode, bytes);
             }
         }
     }
@@ -82,8 +82,25 @@ namespace QM.Server.ApiClient {
 
 
         internal async Task<T> Execute(ApiClient client) {
-            var bytes = await this.GetResult(client);
-            return this.Parse(bytes);
+            var result = await this.GetResult(client);
+            var status = result.Item1;
+
+            var error = status.Convert();
+            if (error.HasValue) {
+                throw new MethodExecuteException() {
+                    StateCode = status,
+                    ErrorType = error.Value
+                };
+            }
+
+            try {
+                return this.Parse(result.Item2);
+            } catch {
+                throw new ParseException() {
+                    TargetType = typeof(T),
+                    TargetData = result.Item2
+                };
+            }
         }
     }
 }

@@ -25,7 +25,7 @@ namespace QM.Server.WebApi.Controller {
                 if (!Request.Content.IsMimeMultipartContent()) {
                     return UploadStates.NotMutiPart;
                 }
-
+                
                 if (!Directory.Exists(TmpDir))
                     Directory.CreateDirectory(TmpDir);
 

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -16,6 +17,8 @@ namespace QM.Server.ApiClient {
                 return _Instance.Value;
             }
         }
+
+        public event EventHandler<ApiClientMessageArgs> OnMessage = null;
 
         private ApiClient() {
 
@@ -38,17 +41,38 @@ namespace QM.Server.ApiClient {
                 throw new MethodValidationException(results);
             }
 
-            return await method.Execute(this);
+            try {
+                return await method.Execute(this);
+            } catch (HttpRequestException ex) {
+                if (this.OnMessage != null)
+                    this.OnMessage.Invoke(method, new ApiClientMessageArgs() {
+                        ErrorType = ErrorTypes.Unknow,
+                        Message = ex.Message
+                    });
+                return default(T);
+            } catch (ParseException ex2) {
+                if (this.OnMessage != null)
+                    this.OnMessage.Invoke(method, new ApiClientMessageArgs() {
+                        ErrorType = ErrorTypes.ParseError,
+                    });
 
-            //using (var content = method.GetContent())
-            //using (var client = new HttpClient()) {
-            //    var request = new HttpRequestMessage(method.HttpMethod, this.BuildUri(method, content));
-            //    if (content != null)
-            //        request.Content = content;
-            //    var rep = await client.SendAsync(request);
-            //    var json = await rep.Content.ReadAsStringAsync();
-            //    return JsonConvert.DeserializeObject<T>(json);
-            //}
+                return default(T);
+            } catch (MethodExecuteException ex3) {
+                if (this.OnMessage != null)
+                    this.OnMessage.Invoke(method, new ApiClientMessageArgs() {
+                        ErrorType = ex3.ErrorType
+                    });
+
+                return default(T);
+            }
         }
+    }
+
+    public sealed class ApiClientMessageArgs : EventArgs {
+        public ErrorTypes? ErrorType {
+            get; set;
+        }
+
+        public string Message { get; set; }
     }
 }
