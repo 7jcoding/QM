@@ -23,7 +23,7 @@ namespace QM.Server.ApiClient.Methods {
         }
 
         [Param]
-        public string RelativePath { get; set; }
+        public string Dir { get; set; }
 
         [Param]
         public bool Traversal { get; private set; }

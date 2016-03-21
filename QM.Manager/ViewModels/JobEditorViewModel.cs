@@ -34,40 +34,40 @@ namespace QM.Manager.ViewModels {
             get; set;
         }
 
-        /// <summary>
-        /// 描述
-        /// </summary>
-        public string Desc { get; set; }
+        ///// <summary>
+        ///// 描述
+        ///// </summary>
+        //public string Desc { get; set; }
 
         /// <summary>
         /// 参数
         /// </summary>
         public BindableCollection<JobParameterInfo> DataMap { get; set; }
 
-        /// <summary>
-        /// 是否可恢复
-        /// </summary>
-        public bool ShouldRecover { get; set; }
+        ///// <summary>
+        ///// 是否可恢复
+        ///// </summary>
+        //public bool ShouldRecover { get; set; }
 
-        public bool Durability { get; set; }
+        //public bool Durability { get; set; }
 
-        /// <summary>
-        /// 是否替换已存在的
-        /// </summary>
-        public bool Replace { get; set; }
+        ///// <summary>
+        ///// 是否替换已存在的
+        ///// </summary>
+        //public bool Replace { get; set; }
 
         public JobInfo Data { get; set; }
 
         /// <summary>
         /// 可选的任务类型
         /// </summary>
-        public IEnumerable<JobTypeInfo> Types { get; set; }
+        public IEnumerable<TypeInfo> Types { get; set; }
 
-        private JobTypeInfo _currentType = null;
+        private TypeInfo _currentType = null;
         /// <summary>
         /// 当前选择的任务类型
         /// </summary>
-        public JobTypeInfo CurrentType {
+        public TypeInfo CurrentType {
             get {
                 return this._currentType;
             }
@@ -111,19 +111,36 @@ namespace QM.Manager.ViewModels {
         }
 
         public async override Task Update() {
-            if (string.IsNullOrWhiteSpace(this.Name))
-                this.Data = null;
-            else {
+            if (string.IsNullOrWhiteSpace(this.Name)) {
+                this.Data = new JobInfo();
+            } else {
+                // Get Job Data
                 var mth = new GetJob() {
                     Group = this.Group,
                     Name = this.Name
                 };
                 this.Data = await ApiClient.Instance.Execute(mth);
+
+                // Load Types from job's dll
+                var mth2 = new GetJobTypes() {
+                    DllPath = this.Data.AssemblyFile
+                };
+                this.Types = await ApiClient.Instance.Execute(mth2);
+                this.CurrentType = this.Types.FirstOrDefault(t => t.FullName.Equals(this.Data.JobTypeFullName));
+
+                //Merge Parameter
+                foreach (var kv in this.Data.DataMap) {
+                    var t = this.DataMap.FirstOrDefault(d => d.Name.Equals(kv.Key));
+                    if (t != null)
+                        t.Value = kv.Value;
+                }
             }
             this.NotifyOfPropertyChange(() => this.Data);
+            this.NotifyOfPropertyChange(() => this.Types);
+            this.NotifyOfPropertyChange(() => this.CurrentType);
         }
 
-        public async void Update(string name, string group) {
+        public async Task Update(string name, string group) {
             this.Name = name;
             this.Group = group;
             await this.Update();
@@ -149,13 +166,13 @@ namespace QM.Manager.ViewModels {
 
         public async void Save() {
             var mth = new SaveJob(this.CurrentType.FullName, this.CurrentType.AssemblyFile) {
-                Desc = this.Desc,
-                Durability = this.Durability,
-                Name = this.Name,
-                Group = this.Group,
+                Desc = this.Data.Desc,
+                Durability = this.Data.Durability,
+                Name = this.Data.Name,
+                Group = this.Data.Group,
                 Parameters = this.DataMap.ToDictionary(p => p.Name, p => p.Value),
-                ReplaceExists = this.Replace,
-                ShouldRecover = this.ShouldRecover
+                ReplaceExists = this.Data.ReplaceExists,
+                ShouldRecover = this.Data.ShouldRecover
             };
             var result = await ApiClient.Instance.Execute(mth);
             MessageBox.Show(result.ToString());

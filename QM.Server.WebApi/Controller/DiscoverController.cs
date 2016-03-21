@@ -21,41 +21,50 @@ namespace QM.Server.WebApi.Controller {
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="relativePath"></param>
+        /// <param name="dir"></param>
         /// <param name="traversal">是否遍历子目录</param>
         /// <param name="showFolder">是否返回文件夹</param>
         /// <returns></returns>
         [HttpGet]
-        public IEnumerable<DiscoverResult> List(string relativePath = null, bool traversal = false, bool showFolder = true) {
+        public IEnumerable<DiscoverResult> List(string dir = "", bool traversal = false, bool showFolder = true) {
             // Path.Combin(@"d:\AAA", @"c:\") will return c:\
-            var path = Path.Combine(Root, relativePath ?? "");
-            if (path.StartsWith(Root, StringComparison.OrdinalIgnoreCase)) {
-                if (Directory.Exists(path)) {
-                    var dlls = this.Filter(Directory.GetFiles(path, "*.dll", traversal ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly))
-                        .Select(d => new DiscoverResult() {
-                            IsFile = true,
-                            RelativePath = d.Replace(Root, "")
-                        });
-                    var dirs = Directory.GetDirectories(path)
-                        .Select(d => new DiscoverResult() {
-                            IsFile = false,
-                            RelativePath = d.Replace(Root, "")
-                        });
-                    //var t = this.T(path);
-                    //return dirs.Concat(t);
-                    if (showFolder)
-                        return dlls.Concat(dirs);
-                    else
-                        return dlls;
-                }
+            dir = dir ?? "";
+            var path = "";
+            if (dir.StartsWith(Root))
+                path = dir;
+            else
+                path = Path.Combine(Root, dir ?? "");
+
+            if (Directory.Exists(path)) {
+                var dlls = this.Filter(Directory.GetFiles(path, "*.dll", traversal ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly))
+                    .Select(d => new DiscoverResult() {
+                        IsFile = true,
+                        RelativePath = d.Replace(Root, "")
+                    });
+                var dirs = Directory.GetDirectories(path)
+                    .Select(d => new DiscoverResult() {
+                        IsFile = false,
+                        RelativePath = d.Replace(Root, "")
+                    });
+                //var t = this.T(path);
+                //return dirs.Concat(t);
+                if (showFolder)
+                    return dlls.Concat(dirs);
+                else
+                    return dlls;
             }
             return Enumerable.Empty<DiscoverResult>();
         }
 
         [HttpGet]
-        public IEnumerable<JobTypeInfo> GetTypes(string dllPath) {
+        public IEnumerable<Entity.TypeInfo> GetTypes(string dllPath) {
             //var path = Path.Combine(Root, dllPath);
-            var path = string.Format(@"{0}\{1}", Root, dllPath);
+            var path = "";
+            if (dllPath.StartsWith(Root))
+                path = dllPath;
+            else
+                path = string.Format(@"{0}\{1}", Root, dllPath);
+
             if (path.StartsWith(Root) && File.Exists(path)) {
                 var asm = Assembly.LoadFrom(path);
                 var types = asm.GetTypes()
@@ -66,7 +75,7 @@ namespace QM.Server.WebApi.Controller {
                 foreach (var t in types) {
                     var desc = t.GetCustomAttribute<DescriptionAttribute>();
                     //TODO
-                    yield return new JobTypeInfo() {
+                    yield return new Entity.TypeInfo() {
                         Desc = desc != null ? desc.Description : "",
                         FullName = t.FullName,
                         Name = t.Name,

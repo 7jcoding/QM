@@ -49,7 +49,7 @@
     <Compile Include="TriggerInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TriggerState.cs" />
-    <Compile Include="JobTypeInfo.cs" />
+    <Compile Include="TypeInfo.cs" />
     <Compile Include="UploadStates.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

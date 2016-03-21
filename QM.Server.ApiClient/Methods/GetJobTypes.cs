@@ -8,7 +8,7 @@ using System.Net.Http;
 using QM.Server.ApiClient.Attributes;
 
 namespace QM.Server.ApiClient.Methods {
-    public class GetJobTypes : BaseMethod<IEnumerable<JobTypeInfo>> {
+    public class GetJobTypes : BaseMethod<IEnumerable<TypeInfo>> {
         public override HttpMethod HttpMethod {
             get {
                 return HttpMethod.Get;

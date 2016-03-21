@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace QM.Server.WebApi.Entity {
-    public class JobTypeInfo {
+    public class TypeInfo {
 
         public string FullName { get; set; }
 

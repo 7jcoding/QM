@@ -52,7 +52,7 @@
                 <ToolBar>
                     <!--<Button x:Name="Upload" Content="{common:FontAwesome Font=Upload}" />-->
                     <Button x:Name="Add" Content="{common:FontAwesome Font=Add}" />
-                    <Button Content="{common:FontAwesome Font=Edit}" />
+                    <Button x:Name="Edit" Content="{common:FontAwesome Font=Edit}" />
                     <Separator />
                     <Button x:Name="Delete" Content="{common:FontAwesome Font=Remove}" />
                 </ToolBar>

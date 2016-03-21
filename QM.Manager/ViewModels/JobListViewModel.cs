@@ -61,6 +61,14 @@ namespace QM.Manager.ViewModels {
             });
         }
 
+        public async void Edit() {
+            var vm = this.Container.GetInstance<JobEditorViewModel>();
+            await this.EventAggregator.PublishOnUIThreadAsync(new OpenRequest() {
+                VM = vm
+            });
+            await vm.Update(this.Current.Name, this.Current.Group);
+        }
+
         public async void Delete() {
             if (MessageBox.Show("确认要删除该任务吗？", "警告", MessageBoxButton.YesNo) == MessageBoxResult.Yes) {
                 var mth = new DeleteJob() {
