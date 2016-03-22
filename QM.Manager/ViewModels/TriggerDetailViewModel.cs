@@ -1,4 +1,5 @@
-﻿using QM.Manager.Common;
+﻿using Caliburn.Micro;
+using QM.Manager.Common;
 using QM.Server.ApiClient;
 using QM.Server.ApiClient.Methods;
 using QM.Server.WebApi.Entity;
@@ -34,7 +35,13 @@ namespace QM.Manager.ViewModels {
         public DataMapViewModel JobDataMapVM { get; set; }
         public DataMapViewModel TriggerDataMapVM { get; set; }
 
-        public TriggerDetailViewModel() {
+        private SimpleContainer Container = null;
+        private IEventAggregator EventAggregator = null;
+
+        public TriggerDetailViewModel(SimpleContainer container, IEventAggregator eag) {
+            this.Container = container;
+            this.EventAggregator = eag;
+
             this.JobDataMapVM = new DataMapViewModel();
             this.TriggerDataMapVM = new DataMapViewModel();
         }
@@ -59,6 +66,13 @@ namespace QM.Manager.ViewModels {
         public void Update(TriggerInfo trigger) {
             this.Data = trigger;
             this.NotifyOfPropertyChange(() => this.Data);
+        }
+
+        public void Add() {
+            var vm = this.Container.GetInstance<TriggerEditorViewModel>();
+            this.EventAggregator.PublishOnUIThreadAsync(new OpenRequest() {
+                VM = vm
+            });
         }
     }
 }

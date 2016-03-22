@@ -103,6 +103,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ViewModels\TriggerDetailViewModel.cs" />
+    <Compile Include="ViewModels\TriggerEditorViewModel.cs" />
     <Compile Include="ViewModels\TriggerListViewModel.cs" />
     <Compile Include="ViewModels\UploadViewModel.cs" />
     <Compile Include="Views\ChoiceDllView.xaml.cs">
@@ -122,6 +123,9 @@
     </Compile>
     <Compile Include="Views\TriggerDetailView.xaml.cs">
       <DependentUpon>TriggerDetailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TriggerEditorView.xaml.cs">
+      <DependentUpon>TriggerEditorView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\TriggerListView.xaml.cs">
       <DependentUpon>TriggerListView.xaml</DependentUpon>
@@ -162,6 +166,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\TriggerDetailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TriggerEditorView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

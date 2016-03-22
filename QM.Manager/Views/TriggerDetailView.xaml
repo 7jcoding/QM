@@ -39,6 +39,7 @@
         <ToolBarTray Grid.Row="0" Grid.ColumnSpan="2" ac:UniPadding.Padding="2">
             <ToolBar>
                 <Button x:Name="Update" Content="{common:FontAwesome Font=Refresh}" />
+                <Button x:Name="Add" Content="{common:FontAwesome Font=Add}" />
                 <Button x:Name="Edit" Content="{common:FontAwesome Font=Edit}"  IsEnabled="{Binding CanDelete}"  />
                 <Separator />
                 <Button x:Name="Pause" Content="{common:FontAwesome Font=Pause}"  IsEnabled="{Binding CanPause}" />

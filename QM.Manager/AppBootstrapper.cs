@@ -6,6 +6,8 @@ namespace QM.Manager {
     using System.Reflection;
     using System.Linq;
     using Common;
+    using Server.ApiClient;
+    using System.Windows;
     public class AppBootstrapper : BootstrapperBase {
         SimpleContainer container;
 
@@ -58,6 +60,12 @@ namespace QM.Manager {
 
         protected override void OnStartup(object sender, System.Windows.StartupEventArgs e) {
             DisplayRootViewFor<IShell>();
+
+            ApiClient.Instance.OnMessage += Instance_OnMessage;
+        }
+
+        private void Instance_OnMessage(object sender, ApiClientMessageArgs e) {
+            MessageBox.Show(e.Message);
         }
     }
 }
