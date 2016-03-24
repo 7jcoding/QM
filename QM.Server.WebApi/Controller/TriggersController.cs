@@ -38,23 +38,8 @@ namespace QM.Server.WebApi.Controller {
 
 
         private TriggerInfo Convert(ITrigger t, IScheduler scd) {
-            string jobType = null;
-            string jobDesc = null;
-            Dictionary<string, object> jobDataMap = null;
-            try {
-                var job = scd.GetJobDetail(t.JobKey);
-                jobDataMap = job.JobDataMap.ToDictionary(d => d.Key, d => d.Value);
-                var type = job.JobType;
-                jobType = type.AssemblyQualifiedName;
-                var attr = type.GetCustomAttribute<DescriptionAttribute>();
-                if (attr != null)
-                    jobDesc = attr.Description;
+            var job = scd.GetJobDetail(t.JobKey);
 
-            } catch {
-                //如果发生异常，可能是以下原因：
-                //数据库中有的任务，在 Jobs 目录下并不存在
-                return null;
-            }
             return new TriggerInfo() {
                 Calendar = t.CalendarName,
                 Desc = t.Description,
@@ -62,7 +47,7 @@ namespace QM.Server.WebApi.Controller {
                 FinalFireTime = t.FinalFireTimeUtc,
                 HasMillisecondPrecision = t.HasMillisecondPrecision,
                 TriggerDataMap = t.JobDataMap.ToDictionary(d => d.Key, d => d.Value),
-                JobDataMap = jobDataMap,
+                JobDataMap = job.JobDataMap.ToDictionary(d => d.Key, d => d.Value),
                 JobGroup = t.JobKey.Group,
                 JobName = t.JobKey.Name,
                 MisfireInstruction = t.MisfireInstruction,
@@ -72,10 +57,31 @@ namespace QM.Server.WebApi.Controller {
                 TriggerName = t.Key.Name,
                 NextFireTime = t.GetNextFireTimeUtc(),
                 PreviousFireTime = t.GetPreviousFireTimeUtc(),
-                JobType = jobType,
-                JobDesc = jobDesc,
-                State = (Entity.TriggerState)(int)scd.GetTriggerState(t.Key)
+                JobType = new JobType(job.JobType),
+                JobDesc = job.Description,
+                State = (Entity.TriggerState)(int)scd.GetTriggerState(t.Key),
+                ScheduleBuilderInfo = t.GetScheduleBuilder().GetInfo()
             };
+        }
+
+        [HttpPut]
+        public TriggerSaveState Put([FromBody]TriggerInfo trigger) {
+            var scd = StdSchedulerFactory.GetDefaultScheduler();
+
+            var sb = trigger.ScheduleBuilderInfo.Build();
+            if (sb == null)
+                return TriggerSaveState.NotSupportScheduleBuilder;
+
+            var job = scd.GetJobDetail(new JobKey(trigger.JobName, trigger.JobGroup));
+            var tb = TriggerBuilder.Create()
+                        .ForJob(job)
+                        .WithSchedule(sb)
+                        .WithDescription(trigger.Desc)
+                        .WithPriority(trigger.Priority)
+                        .WithIdentity(trigger.TriggerName, trigger.TriggerGroup);
+
+            scd.ScheduleJob(tb.Build());
+            return TriggerSaveState.Success;
         }
     }
 }

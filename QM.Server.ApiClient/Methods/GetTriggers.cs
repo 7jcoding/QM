@@ -1,4 +1,5 @@
-﻿using QM.Server.WebApi.Entity;
+﻿using Newtonsoft.Json;
+using QM.Server.WebApi.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,18 @@ namespace QM.Server.ApiClient.Methods {
             get {
                 return "Triggers";
             }
+        }
+
+        private static readonly JsonSerializerSettings Setting;
+
+        static GetTriggers() {
+            Setting = new JsonSerializerSettings();
+            Setting.Converters.Add(new ScheduleBuilderInfoConverter());
+        }
+
+        protected override IEnumerable<TriggerInfo> Parse(byte[] result) {
+            var xml = Encoding.UTF8.GetString(result);
+            return JsonConvert.DeserializeObject<IEnumerable<TriggerInfo>>(xml, Setting);
         }
     }
 }

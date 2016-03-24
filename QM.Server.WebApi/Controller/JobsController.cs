@@ -42,10 +42,7 @@ namespace QM.Server.WebApi.Controller {
                 Desc = j.Description,
                 Durability = j.Durable,
                 Group = j.Key.Group,
-                AssemblyQualifiedName = j.JobType.AssemblyQualifiedName,
-                AssemblyFullName = j.JobType.Assembly.FullName,
-                AssemblyFile = j.JobType.Assembly.Location,
-                JobTypeFullName = j.JobType.FullName,
+                JobType = new JobType(j.JobType),
                 Name = j.Key.Name,
                 ShouldRecover = j.RequestsRecovery
             };
@@ -58,7 +55,7 @@ namespace QM.Server.WebApi.Controller {
                 return JobSaveStates.JobExists;
             }
 
-            var o = Activator.CreateInstanceFrom(job.AssemblyFile, job.JobTypeFullName)
+            var o = Activator.CreateInstanceFrom(job.JobType.AssemblyFile, job.JobType.FullName)
                 .Unwrap();
             Type jobType = o.GetType();
             var builder = JobBuilder.Create(jobType)

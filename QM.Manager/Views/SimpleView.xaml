@@ -1,0 +1,19 @@
+﻿<UserControl x:Class="QM.Manager.Views.SimpleView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:QM.Manager.Views"
+             xmlns:xe="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:ac ="clr-namespace:AsNum.Common.WPF;assembly=AsNum.Common.WPF"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <StackPanel ac:UniPadding.Padding="2">
+        <Label Content="重复间隔" />
+        <xe:TimeSpanUpDown Text="{Binding Data.Interval}" />
+
+        <Label Content="重复次数(为-1时，重复执行)" />
+        <TextBox Text="{Binding Data.RepeatCount}" />
+
+    </StackPanel>
+</UserControl>

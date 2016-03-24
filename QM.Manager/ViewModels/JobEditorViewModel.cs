@@ -123,10 +123,10 @@ namespace QM.Manager.ViewModels {
 
                 // Load Types from job's dll
                 var mth2 = new GetJobTypes() {
-                    DllPath = this.Data.AssemblyFile
+                    DllPath = this.Data.JobType.AssemblyFile
                 };
                 this.Types = await ApiClient.Instance.Execute(mth2);
-                this.CurrentType = this.Types.FirstOrDefault(t => t.FullName.Equals(this.Data.JobTypeFullName));
+                this.CurrentType = this.Types.FirstOrDefault(t => t.FullName.Equals(this.Data.JobType.FullName));
 
                 //Merge Parameter
                 foreach (var kv in this.Data.DataMap) {

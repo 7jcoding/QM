@@ -29,6 +29,8 @@ namespace QM.Manager.Common {
 
         public InstanceMode Mode { get; private set; }
 
+        public Type ForType { get; set; }
+
         public RegistAttribute(InstanceMode mode) {
             this.Mode = mode;
         }

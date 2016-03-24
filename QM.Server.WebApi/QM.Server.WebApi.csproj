@@ -104,7 +104,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="AssemblyResolver.cs" />
     <Compile Include="Controller\ConnectController.cs" />
     <Compile Include="Controller\JobsController.cs" />
     <Compile Include="Controller\MetadataController.cs" />
@@ -112,6 +112,7 @@
     <Compile Include="Controller\DiscoverController.cs" />
     <Compile Include="Controller\UploadController.cs" />
     <Compile Include="Models\UserInfo.cs" />
+    <Compile Include="ScheduleBuilderHelper.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

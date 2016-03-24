@@ -83,5 +83,13 @@ namespace QM.Manager.ViewModels {
                     MessageBox.Show("删除失败");
             }
         }
+
+        public async void Trigger() {
+            var vm = this.Container.GetInstance<TriggerEditorViewModel>();
+            await this.EventAggregator.PublishOnUIThreadAsync(new OpenRequest() {
+                VM = vm
+            });
+            vm.Update(this.Current);
+        }
     }
 }

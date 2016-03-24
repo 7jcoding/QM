@@ -13,13 +13,15 @@ namespace QM.Server.WebApi.Entity {
 
         public string Desc { get; set; }
 
-        public string AssemblyQualifiedName { get; set; }
+        public JobType JobType { get; set; }
 
-        public string AssemblyFullName { get; set; }
+        //public string AssemblyQualifiedName { get; set; }
 
-        public string AssemblyFile { get; set; }
+        //public string AssemblyFullName { get; set; }
 
-        public string JobTypeFullName { get; set; }
+        //public string AssemblyFile { get; set; }
+
+        //public string JobTypeFullName { get; set; }
 
         public Dictionary<string, object> DataMap { get; set; }
 

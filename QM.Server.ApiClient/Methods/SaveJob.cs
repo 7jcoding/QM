@@ -50,8 +50,7 @@ namespace QM.Server.ApiClient.Methods {
 
         protected override object GetSendData() {
             return new JobInfo() {
-                AssemblyFile = this.AssemblyFile,
-                JobTypeFullName = this.JobType,
+                JobType = new JobType(this.JobType, this.AssemblyFile),
                 Desc = this.Desc,
                 Durability = this.Durability,
                 Group = this.Group,

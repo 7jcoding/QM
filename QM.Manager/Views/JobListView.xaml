@@ -35,8 +35,8 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Group}" Header="分组" />
                 <DataGridTextColumn Binding="{Binding Name}" Header="名称" />
-                <DataGridTextColumn Binding="{Binding JobTypeFullName}" Header="任务类型" />
-                <DataGridTextColumn Binding="{Binding AssemblyFile}" Header="Assembly" />
+                <DataGridTextColumn Binding="{Binding JobType.FullName}" Header="任务类型" />
+                <DataGridTextColumn Binding="{Binding JobType.AssemblyFile}" Header="Assembly" />
                 <DataGridTextColumn Binding="{Binding Desc}" Header="描述" />
                 <DataGridCheckBoxColumn Binding="{Binding Durability}" />
                 <DataGridCheckBoxColumn Binding="{Binding ShouldRecover}" />
@@ -51,10 +51,12 @@
             <ToolBarTray Grid.Row="0" Grid.ColumnSpan="3">
                 <ToolBar>
                     <!--<Button x:Name="Upload" Content="{common:FontAwesome Font=Upload}" />-->
-                    <Button x:Name="Add" Content="{common:FontAwesome Font=Add}" />
-                    <Button x:Name="Edit" Content="{common:FontAwesome Font=Edit}" />
+                    <Button x:Name="Add" Content="{common:FontAwesome Font=Add}" ToolTip="新增" />
+                    <Button x:Name="Edit" Content="{common:FontAwesome Font=Edit}" ToolTip="编辑" />
                     <Separator />
-                    <Button x:Name="Delete" Content="{common:FontAwesome Font=Remove}" />
+                    <Button x:Name="Trigger" Content="{common:FontAwesome Font=Plug}" ToolTip="触发" />
+                    <Separator />
+                    <Button x:Name="Delete" Content="{common:FontAwesome Font=Remove}" ToolTip="删除" />
                 </ToolBar>
             </ToolBarTray>
 

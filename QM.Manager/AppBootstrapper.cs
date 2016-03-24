@@ -29,15 +29,22 @@ namespace QM.Manager {
 
         private void RegistInstances(SimpleContainer _container) {
             var types = this.GetType().GetTypeInfo().Assembly.DefinedTypes
-                .Select(t => new { T = t, Mode = t.GetCustomAttribute<RegistAttribute>()?.Mode })
+                .Select(t => {
+                    var attr = t.GetCustomAttribute<RegistAttribute>();
+                    return new {
+                        T = t,
+                        Mode = attr?.Mode,
+                        TargetType = attr?.ForType
+                    };
+                })
                 .Where(o => o.Mode != null && o.Mode != InstanceMode.None);
 
             foreach (var t in types) {
                 var type = t.T.AsType();
                 if (t.Mode == InstanceMode.Singleton) {
-                    _container.RegisterSingleton(type, null, type);
+                    _container.RegisterSingleton(t.TargetType ?? type, null, type);
                 } else if (t.Mode == InstanceMode.PreRequest) {
-                    _container.RegisterPerRequest(type, null, type);
+                    _container.RegisterPerRequest(t.TargetType ?? type, null, type);
                 }
             }
         }
@@ -65,7 +72,7 @@ namespace QM.Manager {
         }
 
         private void Instance_OnMessage(object sender, ApiClientMessageArgs e) {
-            MessageBox.Show(e.Message);
+            MessageBox.Show(e.Message ?? e.ErrorType?.ToString());
         }
     }
 }

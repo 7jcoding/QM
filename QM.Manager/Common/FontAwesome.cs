@@ -45,6 +45,8 @@ namespace QM.Manager.Common {
         [Char('\uf093')]
         Upload,
         [Char('\uf067')]
-        Add
+        Add,
+        [Char('\uf1e6')]
+        Plug
     }
 }

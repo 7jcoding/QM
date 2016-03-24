@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Net.Http;
 using System.ComponentModel.DataAnnotations;
 using QM.Server.ApiClient.Attributes;
+using Newtonsoft.Json;
 
 namespace QM.Server.ApiClient.Methods {
     public class GetTrigger : BaseMethod<TriggerInfo> {
@@ -28,5 +29,17 @@ namespace QM.Server.ApiClient.Methods {
 
         [Param, Required]
         public string Name { get; set; }
+
+        private static readonly JsonSerializerSettings Setting;
+
+        static GetTrigger() {
+            Setting = new JsonSerializerSettings();
+            Setting.Converters.Add(new ScheduleBuilderInfoConverter());
+        }
+
+        protected override TriggerInfo Parse(byte[] result) {
+            var xml = Encoding.UTF8.GetString(result);
+            return JsonConvert.DeserializeObject<TriggerInfo>(xml, Setting);
+        }
     }
 }

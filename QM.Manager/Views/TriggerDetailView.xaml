@@ -29,6 +29,7 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto" />
@@ -39,7 +40,7 @@
         <ToolBarTray Grid.Row="0" Grid.ColumnSpan="2" ac:UniPadding.Padding="2">
             <ToolBar>
                 <Button x:Name="Update" Content="{common:FontAwesome Font=Refresh}" />
-                <Button x:Name="Add" Content="{common:FontAwesome Font=Add}" />
+                <!--<Button x:Name="Add" Content="{common:FontAwesome Font=Add}" />-->
                 <Button x:Name="Edit" Content="{common:FontAwesome Font=Edit}"  IsEnabled="{Binding CanDelete}"  />
                 <Separator />
                 <Button x:Name="Pause" Content="{common:FontAwesome Font=Pause}"  IsEnabled="{Binding CanPause}" />
@@ -60,15 +61,18 @@
         <TextBlock Text="{Binding Data.NextFireTime,Converter={StaticResource DFC}}" Grid.Row="3" Grid.Column="1" />
 
         <Label Content="任务类型" Grid.Row="4" Grid.Column="0" />
-        <TextBlock Text="{Binding Data.JobType}" Grid.Row="4" Grid.Column="1" />
+        <TextBlock Text="{Binding Data.JobType.FullName}" Grid.Row="4" Grid.Column="1" />
 
         <Label Content="任务描述" Grid.Row="5" Grid.Column="0" />
         <TextBlock Text="{Binding Data.JobDesc}" Grid.Row="5" Grid.Column="1" />
 
-        <Label Content="任务参数" Grid.Row="6" Grid.ColumnSpan="2" />
-        <ContentControl Grid.Row="7" x:Name="JobDataMapVM" Grid.ColumnSpan="2" />
+        <Label Content="排期安排" Grid.Row="6" Grid.Column="0" />
+        <TextBlock Text="{Binding Data.ScheduleBuilderInfo.Summary}" Grid.Row="6" Grid.Column="1" />        
+        
+        <Label Content="任务参数" Grid.Row="7" Grid.ColumnSpan="2" />
+        <ContentControl Grid.Row="8" x:Name="JobDataMapVM" Grid.ColumnSpan="2" />
 
-        <Label Content="触发器参数" Grid.Row="8" Grid.ColumnSpan="2" />
-        <ContentControl Grid.Row="9" x:Name="TriggerDataMapVM" Grid.ColumnSpan="2" />
+        <Label Content="触发器参数" Grid.Row="9" Grid.ColumnSpan="2" />
+        <ContentControl Grid.Row="10" x:Name="TriggerDataMapVM" Grid.ColumnSpan="2" />
     </Grid>
 </UserControl>

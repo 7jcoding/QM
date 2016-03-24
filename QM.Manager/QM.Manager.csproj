@@ -78,6 +78,30 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="Xceed.Wpf.AvalonDock, Version=2.6.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.6\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Aero, Version=2.6.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.6\lib\net40\Xceed.Wpf.AvalonDock.Themes.Aero.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Metro, Version=2.6.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.6\lib\net40\Xceed.Wpf.AvalonDock.Themes.Metro.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2010, Version=2.6.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.6\lib\net40\Xceed.Wpf.AvalonDock.Themes.VS2010.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.DataGrid, Version=2.6.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.6\lib\net40\Xceed.Wpf.DataGrid.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.Toolkit, Version=2.6.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.6\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -91,8 +115,10 @@
     <Compile Include="Common\RegistAttribute.cs" />
     <Compile Include="DateTimeOffsetConverter.cs" />
     <Compile Include="Common\BaseScreen.cs" />
+    <Compile Include="IScheduleBuilderVM.cs" />
     <Compile Include="IShell.cs" />
     <Compile Include="ViewModels\ChoiceDllViewModel.cs" />
+    <Compile Include="ViewModels\CornViewModel.cs" />
     <Compile Include="ViewModels\DataMapViewModel.cs" />
     <Compile Include="ViewModels\JobEditorViewModel.cs" />
     <Compile Include="ViewModels\JobListViewModel.cs" />
@@ -102,12 +128,16 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ViewModels\SimpleViewModel.cs" />
     <Compile Include="ViewModels\TriggerDetailViewModel.cs" />
     <Compile Include="ViewModels\TriggerEditorViewModel.cs" />
     <Compile Include="ViewModels\TriggerListViewModel.cs" />
     <Compile Include="ViewModels\UploadViewModel.cs" />
     <Compile Include="Views\ChoiceDllView.xaml.cs">
       <DependentUpon>ChoiceDllView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CornView.xaml.cs">
+      <DependentUpon>CornView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\DataMapView.xaml.cs">
       <DependentUpon>DataMapView.xaml</DependentUpon>
@@ -120,6 +150,9 @@
     </Compile>
     <Compile Include="Views\MetadataView.xaml.cs">
       <DependentUpon>MetadataView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SimpleView.xaml.cs">
+      <DependentUpon>SimpleView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\TriggerDetailView.xaml.cs">
       <DependentUpon>TriggerDetailView.xaml</DependentUpon>
@@ -145,6 +178,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\CornView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\DataMapView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -162,6 +199,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ShellView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SimpleView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
