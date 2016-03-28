@@ -33,8 +33,10 @@ namespace QM.Server.ApiClient.Methods {
         private static readonly JsonSerializerSettings Setting;
 
         static GetTrigger() {
-            Setting = new JsonSerializerSettings();
-            Setting.Converters.Add(new ScheduleBuilderInfoConverter());
+            Setting = new JsonSerializerSettings() {
+                TypeNameHandling = TypeNameHandling.Auto
+            };
+            //Setting.Converters.Add(new ScheduleBuilderInfoConverter());
         }
 
         protected override TriggerInfo Parse(byte[] result) {

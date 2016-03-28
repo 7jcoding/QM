@@ -12,6 +12,10 @@ using System.Threading.Tasks;
 namespace QM.Server.ApiClient {
     public abstract class BaseMethod {
 
+        private static readonly JsonSerializerSettings Setting = new JsonSerializerSettings() {
+            TypeNameHandling = TypeNameHandling.Auto
+        };
+
         public abstract string Model {
             get;
         }
@@ -28,7 +32,7 @@ namespace QM.Server.ApiClient {
         public virtual HttpContent GetContent() {
             var data = this.GetSendData();
             if (data != null) {
-                var json = JsonConvert.SerializeObject(data);
+                var json = JsonConvert.SerializeObject(data, Setting);
                 var content = new StringContent(json);
                 content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json");
                 return content;

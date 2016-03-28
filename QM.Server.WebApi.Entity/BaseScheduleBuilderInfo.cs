@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace QM.Server.WebApi.Entity {
 
-    //[JsonConverter(typeof(AbstractJsonConverter<BaseScheduleBuilderInfo>))]
     public abstract class BaseScheduleBuilderInfo {
         public abstract ScheduleBuilderTypes Type {
             get;

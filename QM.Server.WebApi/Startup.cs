@@ -21,6 +21,11 @@ namespace QM.Server.WebApi {
                 defaults: new { id = RouteParameter.Optional }
             );
 
+            //
+            config.Formatters.JsonFormatter.SerializerSettings = new Newtonsoft.Json.JsonSerializerSettings() {
+                TypeNameHandling = Newtonsoft.Json.TypeNameHandling.Auto
+            };
+
             config.EnableCors();
             appBuilder.UseWebApi(config);
             config.EnsureInitialized();
