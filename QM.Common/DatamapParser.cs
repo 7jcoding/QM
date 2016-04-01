@@ -11,34 +11,34 @@ namespace QM.Common {
     public static class DatamapParser {
         public static readonly Dictionary<Type, Func<JobDataMap, string, object>> SupportTypes = new Dictionary<Type, Func<JobDataMap, string, object>>() {
             {typeof(bool), (datamap, key)=>{
-                return datamap.GetBooleanValueFromString(key);
+                return datamap.GetBooleanValue(key);
             }},
             {typeof(char), (datamap, key)=>{
-                return datamap.GetCharFromString(key);
+                return datamap.GetChar(key);
             }},
             {typeof(DateTime), (datamap, key)=>{
-                return datamap.GetDateTimeValueFromString(key);
+                return datamap.GetDateTimeValue(key);
             }},
             {typeof(DateTimeOffset), (datamap, key)=>{
-                return datamap.GetDateTimeOffsetValueFromString(key);
+                return datamap.GetDateTimeOffsetValue(key);
             }},
             {typeof(double), (datamap, key)=>{
-                return datamap.GetDoubleValueFromString(key);
+                return datamap.GetDoubleValue(key);
             }},
             {typeof(Single), (datamap, key)=>{
-                return datamap.GetFloatValueFromString(key);
+                return datamap.GetFloatValue(key);
             }},
             {typeof(int), (datamap, key)=>{
-                return datamap.GetIntValueFromString(key);
+                return datamap.GetInt(key);
             }},
             {typeof(long), (datamap, key)=>{
-                return datamap.GetLongValueFromString(key);
+                return datamap.GetLongValue(key);
             }},
             {typeof(TimeSpan), (datamap, key)=>{
-                return datamap.GetTimeSpanValueFromString(key);
+                return datamap.GetTimeSpanValue(key);
             }},
             {typeof(decimal), (datamap, key)=>{
-                return datamap.GetDecimalFromString(key);
+                return datamap.GetDecimal(key);
             }},
             {typeof(string), (datamap, key)=>{
                 return datamap.GetString(key);
@@ -68,7 +68,7 @@ namespace QM.Common {
             return instance;
         }
 
-        public static decimal GetDecimalFromString(this JobDataMap datamap, string key) {
+        public static decimal GetDecimal(this JobDataMap datamap, string key) {
             object obj = datamap.Get(key);
 
             if (obj is string) {
