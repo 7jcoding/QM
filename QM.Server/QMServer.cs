@@ -25,7 +25,7 @@ namespace QM.Server {
                 this.Scheduler = this.Factory.GetScheduler();
                 this.Scheduler.JobFactory = new IsolatedJobFactory();
                 this.CanStart = true;
-            } catch (Exception ex) {
+            } catch (Exception) {
                 this.CanStart = false;
             }
         }

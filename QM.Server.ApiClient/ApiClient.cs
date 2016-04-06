@@ -50,7 +50,7 @@ namespace QM.Server.ApiClient {
                         Message = ex.Message
                     });
                 return default(T);
-            } catch (ParseException ex2) {
+            } catch (ParseException) {
                 if (this.OnMessage != null)
                     this.OnMessage.Invoke(method, new ApiClientMessageArgs() {
                         ErrorType = ErrorTypes.ParseError,
