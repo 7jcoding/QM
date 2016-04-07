@@ -26,7 +26,7 @@ namespace JobA {
             //}
 
             var p = dataMap.Parse<Parameter>();
-            Console.WriteLine("{0}\t{1}\t{2}\t{3}\t{0}", p.Name, p.Birthday, p.Score, p.Grade, p.PreScore);
+            Console.WriteLine("{0}\t{1}\t{2}\t{3}\t{4}", p.Name, p.Birthday, p.Score, p.Grade, p.PreScore);
 
 
             Thread.Sleep(TimeSpan.FromMinutes(3));
