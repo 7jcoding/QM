@@ -1,23 +1,16 @@
 ﻿using QM.Server.WebApi.Entity;
 using Quartz;
-using Quartz.Impl;
 using Quartz.Impl.Matchers;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web.Http;
-using System.Web.Http.Cors;
-using System.Reflection;
-using System.ComponentModel;
 
 namespace QM.Server.WebApi.Controller {
 
     public class TriggersController : ApiController {
 
         public IEnumerable<TriggerInfo> Get() {
-            var scd = StdSchedulerFactory.GetDefaultScheduler();
+            var scd = Global.Scheduler;
             var grps = scd.GetTriggerGroupNames();
             var tks = grps.SelectMany(grp => scd.GetTriggerKeys(GroupMatcher<TriggerKey>.GroupEquals(grp)));
             return tks.Select(k => {
@@ -28,7 +21,7 @@ namespace QM.Server.WebApi.Controller {
 
         [HttpGet]
         public TriggerInfo Get(string group, string name) {
-            var scd = StdSchedulerFactory.GetDefaultScheduler();
+            var scd = Global.Scheduler;
             var t = scd.GetTrigger(new TriggerKey(name, group));
             if (t != null) {
                 return Convert(t, scd);
@@ -66,7 +59,7 @@ namespace QM.Server.WebApi.Controller {
 
         [HttpPut]
         public TriggerSaveState Put([FromBody]TriggerInfo trigger) {
-            var scd = StdSchedulerFactory.GetDefaultScheduler();
+            var scd = Global.Scheduler;
 
             var sb = trigger.ScheduleBuilderInfo.Build();
             if (sb == null)

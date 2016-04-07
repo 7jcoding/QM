@@ -1,11 +1,7 @@
-﻿using QM.Server.WebApi.Entity;
-using System;
+﻿using QM.Server.ApiClient.Attributes;
+using QM.Server.WebApi.Entity;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Net.Http;
-using QM.Server.ApiClient.Attributes;
 
 namespace QM.Server.ApiClient.Methods {
     public class GetJobTypes : BaseMethod<IEnumerable<TypeInfo>> {

@@ -1,14 +1,9 @@
-﻿using Common.Logging;
-using Microsoft.Owin.Hosting;
+﻿using Microsoft.Owin.Hosting;
 using QM.Server.WebApi;
 using Quartz;
 using Quartz.Impl;
 using Quartz.Impl.Matchers;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
 using Topshelf;
 
 namespace QM.Server {

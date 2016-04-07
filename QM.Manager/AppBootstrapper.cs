@@ -1,13 +1,13 @@
 namespace QM.Manager {
-    using System;
-    using System.Collections.Generic;
     using Caliburn.Micro;
-    using ViewModels;
-    using System.Reflection;
-    using System.Linq;
     using Common;
     using Server.ApiClient;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Reflection;
     using System.Windows;
+    using ViewModels;
     public class AppBootstrapper : BootstrapperBase {
         SimpleContainer container;
 

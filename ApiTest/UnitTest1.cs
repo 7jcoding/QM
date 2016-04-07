@@ -1,8 +1,6 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using QM.Server.ApiClient.Methods;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using QM.Server.ApiClient;
-using System.IO;
+using QM.Server.ApiClient.Methods;
 
 namespace ApiTest {
     [TestClass]

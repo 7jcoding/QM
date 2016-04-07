@@ -1,13 +1,9 @@
 ﻿using Caliburn.Micro;
-using Microsoft.Win32;
 using QM.Manager.Common;
 using QM.Server.ApiClient;
 using QM.Server.ApiClient.Methods;
 using QM.Server.WebApi.Entity;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 

@@ -1,13 +1,9 @@
 ﻿using QM.Server.WebApi.Entity;
 using Quartz;
-using Quartz.Impl;
 using Quartz.Impl.Matchers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace QM.Server.WebApi.Controller {
@@ -15,7 +11,7 @@ namespace QM.Server.WebApi.Controller {
 
         [HttpGet]
         public IEnumerable<JobInfo> Get() {
-            var scd = StdSchedulerFactory.GetDefaultScheduler();
+            var scd = Global.Scheduler;
             var grps = scd.GetJobGroupNames();
             var jobs = grps.SelectMany(
                             grp => scd.GetJobKeys(GroupMatcher<JobKey>.GroupEquals(grp))
@@ -27,7 +23,7 @@ namespace QM.Server.WebApi.Controller {
 
         [HttpGet]
         public JobInfo Get(string name, string group) {
-            var scd = StdSchedulerFactory.GetDefaultScheduler();
+            var scd = Global.Scheduler;
             var job = scd.GetJobDetail(new JobKey(name, group));
             return this.Convert(job);
         }
@@ -50,7 +46,7 @@ namespace QM.Server.WebApi.Controller {
 
         [HttpPut]
         public JobSaveStates Put([FromBody]JobInfo job) {
-            var scd = StdSchedulerFactory.GetDefaultScheduler();
+            var scd = Global.Scheduler;
             if (!job.ReplaceExists && scd.CheckExists(new JobKey(job.Name, job.Group))) {
                 return JobSaveStates.JobExists;
             }
@@ -72,7 +68,7 @@ namespace QM.Server.WebApi.Controller {
 
         [HttpDelete]
         public bool Delete(string name, string group = null) {
-            var scd = StdSchedulerFactory.GetDefaultScheduler();
+            var scd = Global.Scheduler;
             return scd.DeleteJob(new JobKey(name, group));
         }
     }

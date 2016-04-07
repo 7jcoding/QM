@@ -1,12 +1,8 @@
 ﻿using QM.Server.WebApi.Entity;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Net.Http;
-using QM.Server.ApiClient.Attributes;
 using System.ComponentModel.DataAnnotations;
+using System.Net.Http;
 
 namespace QM.Server.ApiClient.Methods {
     public class SaveJob : BaseMethod<JobSaveStates> {

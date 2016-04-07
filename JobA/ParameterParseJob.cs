@@ -1,13 +1,9 @@
 ﻿using Common.Logging;
+using QM.Common;
 using Quartz;
 using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Text;
-using QM.Common;
-using System.Threading;
 using System.ComponentModel;
+using System.Threading;
 
 namespace JobA {
     [Description("参数解析示例")]
